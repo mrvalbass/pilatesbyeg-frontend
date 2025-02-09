@@ -1,1 +1,36 @@
 @import 'tailwindcss';
+@plugin "daisyui";
+@plugin "daisyui/theme" {
+	name: 'pilates';
+	default: false;
+	prefersdark: false;
+	color-scheme: 'light';
+	--color-base-100: oklch(70% 0.04 256.788);
+	--color-base-200: oklch(98% 0 0);
+	--color-base-300: oklch(98% 0 0);
+	--color-base-content: oklch(27% 0.041 260.031);
+	--color-primary: oklch(98% 0 0);
+	--color-primary-content: oklch(27% 0.041 260.031);
+	--color-secondary: oklch(89% 0.058 10.001);
+	--color-secondary-content: oklch(44% 0.011 73.639);
+	--color-accent: oklch(55% 0.027 264.364);
+	--color-accent-content: oklch(98% 0 0);
+	--color-neutral: oklch(27% 0.041 260.031);
+	--color-neutral-content: oklch(98% 0 0);
+	--color-info: oklch(27% 0.041 260.031);
+	--color-info-content: oklch(98% 0 0);
+	--color-success: oklch(44% 0.119 151.328);
+	--color-success-content: oklch(96% 0.044 156.743);
+	--color-warning: oklch(55% 0.135 66.442);
+	--color-warning-content: oklch(94% 0.129 101.54);
+	--color-error: oklch(50% 0.213 27.518);
+	--color-error-content: oklch(93% 0.032 17.717);
+	--radius-selector: 1rem;
+	--radius-field: 1rem;
+	--radius-box: 1rem;
+	--size-selector: 0.25rem;
+	--size-field: 0.25rem;
+	--border: 2px;
+	--depth: 0;
+	--noise: 0;
+}
