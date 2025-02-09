@@ -24,7 +24,7 @@ const config: Config = {
 
 	//Coverage
 	coverageProvider: 'v8',
-	coverageDirectory: '<rootDir>/src/tests/coverage',
+	coverageDirectory: '<rootDir>/tests/coverage',
 	collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}', '!src/**/*.test.{js,jsx,ts,tsx}'],
 	coveragePathIgnorePatterns: ['/node_modules/', '/.next/', '/__tests__/', '/types/', '/constants/', '\\.d\\.ts$'],
 	coverageThreshold: {

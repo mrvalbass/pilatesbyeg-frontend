@@ -1,9 +1,9 @@
+import '@styles/globals.css'
 import type { Metadata } from 'next'
-import './globals.css'
 
 export const metadata: Metadata = {
-	title: 'Pilates by EG',
-	description: 'Site de Pilates by EG',
+	title: 'VG template',
+	description: 'Template for NextJS Projects',
 }
 
 export default function RootLayout({
