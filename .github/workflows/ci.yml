@@ -1,8 +1,6 @@
 name: Lint & Tests
 
 on:
-  push:
-    branches: [dev, main]
   pull_request:
     branches: [dev, main]
 
@@ -11,23 +9,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Checkout du code
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: 🔧 Configuration de Node.js
+      - name: Node setup
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
 
-      - name: 📦 Installation des dépendances
+      - name: Install dependencies
         run: yarn install
 
-      - name: 🧐 Vérification ESLint
+      - name: Check linter
         run: yarn lint
 
-      - name: 🎨 Vérification Prettier
+      - name: Check format
         run: yarn format:check
 
-      - name: 🛠 Exécution des tests
+      - name: Run tests
         run: yarn test:coverage
