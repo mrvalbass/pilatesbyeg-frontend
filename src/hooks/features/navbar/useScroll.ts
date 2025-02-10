@@ -9,15 +9,13 @@ function useScrollTrigger({ containerId }: UseScrollTriggerProps) {
 	const lastScrollY = useRef(0)
 	const lastDirection = useRef<'down' | 'up'>('up')
 	const timeout = useRef<NodeJS.Timeout | null>(null)
-	const container = useRef<HTMLElement | Window>(window)
+	const container = useRef<HTMLElement | Window | null>(null)
 
 	useEffect(() => {
-		if (containerId) {
-			container.current = document.getElementById(containerId) ?? window
-		}
+		container.current = containerId ? (document.getElementById(containerId) ?? window) : window
 
 		const handleScroll = () => {
-			if (timeout.current) return
+			if (timeout.current || !container.current) return
 
 			const scrollY = 'scrollY' in container.current ? container.current.scrollY : container.current.scrollTop
 			const scrollDirection = lastScrollY.current - scrollY > 0 ? 'up' : 'down'
@@ -32,7 +30,7 @@ function useScrollTrigger({ containerId }: UseScrollTriggerProps) {
 			}, 100)
 		}
 		container.current.addEventListener('scroll', handleScroll)
-		return () => container.current.removeEventListener('scroll', handleScroll)
+		return () => container.current?.removeEventListener('scroll', handleScroll)
 	}, [containerId])
 
 	return { scrollTrigger }
