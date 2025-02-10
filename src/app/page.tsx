@@ -1,3 +1,12 @@
 export default function Home() {
-	return <div className="p-3 text-3xl">Hello World!</div>
+	return (
+		<>
+			<section className="bg-base-200 flex h-[80svh] items-center justify-center">
+				<div>Video</div>
+			</section>
+			<section className="flex h-[80svh] items-center justify-center">
+				<div>Présentation</div>
+			</section>
+		</>
+	)
 }

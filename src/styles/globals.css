@@ -2,8 +2,8 @@
 @plugin "daisyui";
 @plugin "daisyui/theme" {
 	name: 'pilates';
-	default: false;
-	prefersdark: false;
+	default: true;
+	prefersdark: true;
 	color-scheme: 'light';
 	--color-base-100: oklch(70% 0.04 256.788);
 	--color-base-200: oklch(98% 0 0);
