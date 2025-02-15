@@ -18,7 +18,7 @@ interface TiltedCardProps {
 	showTooltip?: boolean
 	overlayContent?: React.ReactNode
 	displayOverlayContent?: boolean
-	onClick?: () => void
+	onClick?: (() => void) | undefined
 }
 
 const springValues: SpringOptions = {

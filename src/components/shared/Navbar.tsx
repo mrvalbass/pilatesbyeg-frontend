@@ -37,7 +37,9 @@ function Navbar() {
 						style={{ positionAnchor: '--menu' } as CSSProperties}
 					>
 						<li>
-							<Link href={'/planning'}>Planning</Link>
+							<Link href={'/planning'} className="text-neutral-content">
+								Planning
+							</Link>
 						</li>
 					</ul>
 				</div>

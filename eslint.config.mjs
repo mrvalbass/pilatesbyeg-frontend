@@ -50,6 +50,7 @@ const eslintConfig = [
 			'import/no-unresolved': 'error',
 			'import/named': 'error',
 			'no-console': ['warn', { allow: ['warn', 'error'] }],
+			'jsx-a11y/click-events-have-key-events': 'off',
 			'prettier/prettier': 'warn',
 		},
 		settings: {
