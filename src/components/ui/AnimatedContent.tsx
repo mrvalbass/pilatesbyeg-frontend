@@ -1,5 +1,6 @@
 'use client'
-import { animated, SpringConfig, useSpring } from '@react-spring/web'
+import type { SpringConfig } from '@react-spring/web'
+import { animated, useSpring } from '@react-spring/web'
 import { ReactNode, useEffect, useRef, useState } from 'react'
 
 interface AnimatedContentProps {
@@ -70,10 +71,12 @@ const AnimatedContent: React.FC<AnimatedContentProps> = ({
 		config,
 	})
 
+	const AnimatedDiv = animated.div as React.ElementType
+
 	return (
-		<animated.div ref={ref} style={springProps}>
+		<AnimatedDiv ref={ref} style={springProps}>
 			{children}
-		</animated.div>
+		</AnimatedDiv>
 	)
 }
 
