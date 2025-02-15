@@ -9,7 +9,7 @@ const ActionSection = () => {
 				delay={50}
 				animateBy="words"
 				direction="bottom"
-				className="text-base-content font-heading flex max-w-3/5 justify-center text-6xl leading-30"
+				className="text-base-content font-heading flex max-w-3/5 justify-center text-4xl leading-30 md:text-6xl"
 			/>
 			<ClickSpark sparkColor="oklch(44% 0.011 73.639)" sparkSize={10} sparkRadius={20} sparkCount={8} duration={400} />
 		</section>
