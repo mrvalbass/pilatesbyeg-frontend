@@ -1,6 +1,6 @@
 const HeroSection = () => {
 	return (
-		<section className="relative flex h-[80svh] items-center justify-center">
+		<section className="relative flex h-[75svh] items-center justify-center">
 			<video
 				autoPlay
 				loop
