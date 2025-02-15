@@ -3,7 +3,7 @@ import ClickSpark from '@/components/ui/ClickSpark'
 
 const ActionSection = () => {
 	return (
-		<section id="cta" className="bg-base-200 relative flex h-[80svh] items-center justify-center">
+		<section id="cta" className="bg-base-200 relative flex h-[50svh] items-center justify-center">
 			<BlurText
 				text="Réservez votre séance d’essai au 06.49.81.02.80"
 				delay={50}
