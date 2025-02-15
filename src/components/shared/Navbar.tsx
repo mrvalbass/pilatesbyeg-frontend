@@ -51,7 +51,7 @@ function Navbar() {
 				<div className="navbar-end">
 					<div className="hidden items-center gap-4 md:flex">
 						<Link href={'/planning'}>Planning</Link>
-						<Link href={'/#cta'} scroll className="btn btn-accent">
+						<Link href={'#cta'} scroll className="btn btn-accent">
 							Réservez votre séance d&apos;essai
 						</Link>
 					</div>
