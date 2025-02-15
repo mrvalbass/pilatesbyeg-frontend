@@ -1,9 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 @import 'tailwindcss';
 @plugin "daisyui";
 @plugin "daisyui/theme" {
 	name: 'pilates';
-	default: false;
-	prefersdark: false;
+	default: true;
+	prefersdark: true;
 	color-scheme: 'light';
 	--color-base-100: oklch(70% 0.04 256.788);
 	--color-base-200: oklch(98% 0 0);
@@ -33,4 +34,13 @@
 	--border: 2px;
 	--depth: 0;
 	--noise: 0;
+}
+
+@theme {
+	--font-heading: 'Playfair Display', serif;
+	--font-body: 'Lora', serif;
+}
+
+html {
+	scroll-behavior: smooth;
 }
