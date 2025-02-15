@@ -91,7 +91,8 @@ const BlurText: React.FC<BlurTextProps> = ({
 					}
 				: animationFrom || defaultFrom,
 			delay: i * delay,
-			config: { easing },
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
+			config: { easing: easing as any },
 		}))
 	)
 	const AnimatedSpan = animated.span as React.ElementType
