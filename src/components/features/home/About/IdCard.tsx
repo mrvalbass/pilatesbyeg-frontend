@@ -19,9 +19,11 @@ const IdCard = () => {
 				className="rounded-t-box h-[300] w-full object-cover object-[50%_25%]"
 			/>
 			<div className="rounded-t-box to-neutral absolute top-0 h-[300] w-full bg-gradient-to-b from-transparent" />
-			<h1 className="font-heading text-neutral-content absolute top-[240] left-6 text-2xl font-bold">Eliane</h1>
+			<h1 className="font-heading text-neutral-content absolute top-[225] left-6 text-2xl font-bold">Eliane</h1>
+			<h2 className="text-neutral-content absolute top-[260] left-6 mb-2 text-lg font-bold">
+				Coach diplômée d&apos;état
+			</h2>
 			<div className="p-4">
-				<h2 className="mb-2 text-lg">Coach diplômée d&apos;état</h2>
 				<p>
 					Lorem ipsum dolor sit amet consectetur adipisicing elit. In accusantium delectus et iste magnam eos fuga,
 					facilis officiis!
@@ -41,9 +43,9 @@ const IdCard = () => {
 				<Image
 					src="https://res.cloudinary.com/dmftxzhvh/image/upload/v1739613620/pilatesbyeg/EG-picture_hxn10p.jpg"
 					alt="EG profile picture"
-					width={150}
+					width={200}
 					height={100}
-					className="rounded-box h-[150] w-[100] object-cover"
+					className="rounded-box w-[150] object-cover"
 				/>
 				<div>
 					<h1 className="font-heading text-2xl">Eliane</h1>
@@ -63,8 +65,14 @@ const IdCard = () => {
 	)
 
 	return (
-		<FadeContent blur className="md:basis-1/2" duration={200} threshold={isMobile ? 0.5 : 0.8} delay={500}>
-			<AnimatedContent distance={50} animateOpacity={false} delay={500} threshold={isMobile ? 0.1 : 0.8}>
+		<FadeContent
+			blur
+			className="md:basis-1/2"
+			duration={200}
+			threshold={isMobile ? 0.5 : 0.8}
+			delay={isMobile ? 0 : 500}
+		>
+			<AnimatedContent distance={50} animateOpacity={false} delay={isMobile ? 0 : 500} threshold={isMobile ? 0.1 : 0.8}>
 				<Card className="md:basis-1/2">{isMobile ? mobileContent : webContent}</Card>
 			</AnimatedContent>
 		</FadeContent>

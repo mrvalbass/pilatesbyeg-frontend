@@ -26,9 +26,8 @@ const Courses = ({ handleClicks }: CourseProps) => {
 					height={200}
 					className="rounded-box aspect-square object-cover"
 				/>
-				<p className="font-heading text-neutral-content bg-neutral/80 rounded-box absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 px-6 py-4 text-center text-2xl font-bold">
-					Pilates
-				</p>
+				<div className="to-neutral rounded-box absolute top-0 h-full w-full bg-gradient-to-b from-transparent" />
+				<p className="font-heading text-neutral-content absolute bottom-5 left-5 text-xl font-bold">Pilates</p>
 			</Card>
 			<Card className="relative" onClick={handleCardioClick}>
 				<Image
@@ -38,8 +37,10 @@ const Courses = ({ handleClicks }: CourseProps) => {
 					height={200}
 					className="rounded-box aspect-square object-cover"
 				/>
-				<p className="font-heading text-neutral-content bg-neutral/80 rounded-box absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 px-6 py-4 text-center text-2xl font-bold">
-					Cardio / Renforcement Musculaire
+				<div className="to-neutral rounded-box absolute top-0 h-full w-full bg-gradient-to-b from-transparent" />
+				<p className="font-heading text-neutral-content absolute bottom-5 left-5 text-xl font-bold">
+					Cardio / <br />
+					Renforcement Musculaire
 				</p>
 			</Card>
 		</div>
@@ -57,7 +58,7 @@ const Courses = ({ handleClicks }: CourseProps) => {
 				displayOverlayContent
 				scaleOnHover={1}
 				overlayContent={
-					<p className="font-heading text-neutral-content bg-neutral/80 rounded-box p-6 text-center text-xl font-bold">
+					<p className="font-heading text-neutral-content bg-neutral/90 rounded-box px-6 py-4 text-center text-xl font-bold">
 						Pilates
 					</p>
 				}
@@ -73,7 +74,7 @@ const Courses = ({ handleClicks }: CourseProps) => {
 				scaleOnHover={1}
 				displayOverlayContent
 				overlayContent={
-					<p className="font-heading text-neutral-content bg-neutral/80 rounded-box p-4 text-center text-xl font-bold">
+					<p className="font-heading text-neutral-content bg-neutral/90 rounded-box px-6 py-4 text-center text-xl font-bold">
 						Cardio / Renforcement Musculaire
 					</p>
 				}

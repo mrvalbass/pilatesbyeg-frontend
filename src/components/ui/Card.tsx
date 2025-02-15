@@ -17,7 +17,7 @@ const Card = ({ children, className, onClick }: CardProps) => {
 		<div
 			tabIndex={0}
 			role="button"
-			className={`bg-base-100 rounded-box text-base-content md:p-12 ${className}`}
+			className={`bg-base-100 rounded-box text-base-content md:p-8 ${className}`}
 			onClick={handleClick}
 		>
 			{children}

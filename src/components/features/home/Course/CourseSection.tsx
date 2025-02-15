@@ -29,7 +29,7 @@ const CourseSection = () => {
 		<>
 			<PilatesModal isOpen={pilatesModalIsOpen} handleCloseClick={handlePilatesCloseClick} />
 			<CardioModal isOpen={cardioModalIsOpen} handleCloseClick={handleCardioCloseClick} />
-			<section className="bg-base-200 min-h-[80svh] p-12">
+			<section className="bg-base-200 min-h-[60svh] p-12">
 				<div className="mx-auto flex h-full w-full max-w-[1500px] flex-col items-center justify-around gap-12">
 					<h2 className="font-heading text-3xl">Les disciplines</h2>
 					<Courses handleClicks={[handlePilatesClick, handleCardioClick]} />
