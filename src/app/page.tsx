@@ -1,12 +1,17 @@
+import AboutSection from '@/components/features/home/AboutSection'
+import ActionSection from '@/components/features/home/ActionSection'
+import CourseSection from '@/components/features/home/CourseSection'
+import HeroSection from '@/components/features/home/HeroSection'
+import ReviewSection from '@/components/features/home/ReviewSection'
+
 export default function Home() {
 	return (
 		<>
-			<section className="bg-base-200 flex h-[80svh] items-center justify-center">
-				<div>Video</div>
-			</section>
-			<section className="flex h-[80svh] items-center justify-center">
-				<div>Présentation</div>
-			</section>
+			<HeroSection />
+			<AboutSection />
+			<CourseSection />
+			<ReviewSection />
+			<ActionSection />
 		</>
 	)
 }

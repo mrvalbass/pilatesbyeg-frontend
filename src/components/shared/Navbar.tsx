@@ -17,7 +17,7 @@ function Navbar() {
 	)
 
 	return (
-		<div className="fixed top-8 flex w-full justify-center" aria-hidden={!showNavbar}>
+		<div className="text-neutral-content fixed top-8 z-20 flex w-full justify-center" aria-hidden={!showNavbar}>
 			<div className={navbarClasses}>
 				<div className="navbar-start">
 					<Link href={'/'} className="hidden text-xl md:inline-flex">
@@ -36,7 +36,7 @@ function Navbar() {
 						id="menu-popover"
 						style={{ positionAnchor: '--menu' } as CSSProperties}
 					>
-						<li className="text-neutral-content">
+						<li>
 							<Link href={'/planning'}>Planning</Link>
 						</li>
 					</ul>
@@ -49,11 +49,11 @@ function Navbar() {
 				<div className="navbar-end">
 					<div className="hidden items-center gap-4 md:flex">
 						<Link href={'/planning'}>Planning</Link>
-						<Link href={'#'} className="btn btn-accent">
+						<Link href={'/#cta'} scroll className="btn btn-accent">
 							Réservez votre séance d&apos;essai
 						</Link>
 					</div>
-					<Link href={'#'} className="btn btn-accent md:hidden">
+					<Link href={'/#cta'} scroll className="btn btn-accent md:hidden">
 						<MdSportsGymnastics size={20} />
 					</Link>
 				</div>

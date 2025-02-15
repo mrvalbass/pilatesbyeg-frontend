@@ -1,4 +1,4 @@
-import { Navbar } from '@/components/features/navbar'
+import Navbar from '@/components/shared/Navbar'
 import '@styles/globals.css'
 import type { Metadata } from 'next'
 
@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={`antialiased md:subpixel-antialiased`}>
+			<body className={`font-body antialiased md:subpixel-antialiased`}>
 				<Navbar />
 				{children}
 			</body>
