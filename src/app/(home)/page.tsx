@@ -4,7 +4,7 @@ import CourseSection from '@/components/features/home/Course/CourseSection'
 import HeroSection from '@/components/features/home/Hero/HeroSection'
 import ReviewSection from '@/components/features/home/Review/ReviewSection'
 
-export default function Home() {
+function Home() {
 	return (
 		<>
 			<HeroSection />
@@ -15,3 +15,5 @@ export default function Home() {
 		</>
 	)
 }
+
+export default Home
