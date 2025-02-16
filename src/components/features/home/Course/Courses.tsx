@@ -26,7 +26,7 @@ const Courses = ({ handleClicks }: CourseProps) => {
 					height={200}
 					className="rounded-box aspect-square object-cover"
 				/>
-				<div className="to-neutral rounded-box absolute top-0 h-full w-full bg-gradient-to-b from-transparent" />
+				<div className="to-neutral rounded-box absolute top-0 h-full w-full bg-gradient-to-b from-transparent via-transparent" />
 				<p className="font-heading text-neutral-content absolute bottom-5 left-5 text-xl font-bold">Pilates</p>
 			</Card>
 			<Card className="relative" onClick={handleCardioClick}>
@@ -37,7 +37,7 @@ const Courses = ({ handleClicks }: CourseProps) => {
 					height={200}
 					className="rounded-box aspect-square object-cover"
 				/>
-				<div className="to-neutral rounded-box absolute top-0 h-full w-full bg-gradient-to-b from-transparent" />
+				<div className="to-neutral rounded-box absolute top-0 h-full w-full bg-gradient-to-b from-transparent via-transparent" />
 				<p className="font-heading text-neutral-content absolute bottom-5 left-5 text-xl font-bold">
 					Cardio / <br />
 					Renforcement Musculaire
