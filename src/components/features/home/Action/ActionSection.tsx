@@ -3,7 +3,7 @@ import ClickSpark from '@/components/ui/ClickSpark'
 import Link from 'next/link'
 
 const ActionSection = () => {
-	const tel = typeof window !== undefined ? 'tel:+336' : '#cta'
+	const tel = typeof window !== undefined ? 'tel:+33649810280' : '#cta'
 	return (
 		<section id="cta" className="bg-base-200 relative flex h-[50svh] items-center justify-center">
 			<Link className="flex w-fit justify-center" href={tel}>
