@@ -156,7 +156,7 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
 		sparksRef.current.push(...newSparks)
 	}
 
-	return <canvas ref={canvasRef} className="absolute block h-full w-full select-none" onClick={handleClick} />
+	return <canvas ref={canvasRef} className="absolute top-0 block h-full w-full select-none" onClick={handleClick} />
 }
 
 export default ClickSpark
