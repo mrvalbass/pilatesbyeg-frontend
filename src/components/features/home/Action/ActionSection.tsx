@@ -12,7 +12,7 @@ const ActionSection = () => {
 					delay={50}
 					animateBy="words"
 					direction="bottom"
-					className="text-base-content font-heading relative z-1 flex max-w-3/5 justify-center text-4xl leading-30 md:text-6xl"
+					className="text-base-content font-heading relative z-1 flex max-w-3/5 justify-center text-4xl leading-15 md:text-6xl md:leading-30"
 				/>
 			</Link>
 			<ClickSpark sparkColor="oklch(44% 0.011 73.639)" sparkSize={10} sparkRadius={20} sparkCount={8} duration={400} />

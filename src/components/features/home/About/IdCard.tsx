@@ -18,21 +18,12 @@ const IdCard = () => {
 				height={100}
 				className="rounded-t-box h-[300] w-full object-cover object-[50%_25%]"
 			/>
-			<div className="rounded-t-box to-neutral absolute top-0 h-[300] w-full bg-gradient-to-b from-transparent" />
+			<div className="rounded-t-box to-neutral absolute top-0 h-[300] w-full bg-gradient-to-b from-transparent via-transparent" />
 			<h1 className="font-heading text-neutral-content absolute top-[225] left-6 text-2xl font-bold">Eliane</h1>
-			<h2 className="text-neutral-content absolute top-[260] left-6 mb-2 text-lg font-bold">
-				Coach diplômée d&apos;état
-			</h2>
+			<h2 className="text-neutral-content absolute top-[260] left-6 mb-2 text-lg font-bold">Coach</h2>
 			<div className="p-4">
-				<p>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. In accusantium delectus et iste magnam eos fuga,
-					facilis officiis!
-				</p>
-				<p className="mt-4">
-					Lorem ipsum dolor, sit amet consectetur adipisicing elit. In accusantium delectus et iste magnam eos fuga,
-					facilis officiis! Aliquid maiores eveniet accusamus assumenda quibusdam a ipsum voluptate eius accusantium
-					officiis.
-				</p>
+				Coach sportif, diplômée d’un BPJEPS AGFF (activité gymnique de la forme et de la force), depuis 2012. <br />
+				Formée à enseigner la méthode Pilates depuis 2014.
 			</div>
 		</article>
 	)
@@ -49,18 +40,13 @@ const IdCard = () => {
 				/>
 				<div>
 					<h1 className="font-heading text-2xl">Eliane</h1>
-					<h2 className="my-2 text-lg">Coach diplômée d&apos;état</h2>
+					<h2 className="my-2 text-lg">Coach</h2>
 					<p>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. In accusantium delectus et iste magnam eos fuga,
-						facilis officiis!
+						Coach sportif, diplômée d’un BPJEPS AGFF (activité gymnique de la forme et de la force), depuis 2012. <br />
+						Formée à enseigner la méthode Pilates depuis 2014.
 					</p>
 				</div>
 			</div>
-			<p className="mt-6">
-				Lorem ipsum dolor, sit amet consectetur adipisicing elit. In accusantium delectus et iste magnam eos fuga,
-				facilis officiis! Aliquid maiores eveniet accusamus assumenda quibusdam a ipsum voluptate eius accusantium
-				officiis.
-			</p>
 		</article>
 	)
 
