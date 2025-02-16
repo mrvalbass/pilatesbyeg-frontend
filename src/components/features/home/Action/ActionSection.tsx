@@ -5,7 +5,7 @@ import Link from 'next/link'
 const ActionSection = () => {
 	const tel = typeof window !== undefined ? 'tel:+33649810280' : '#cta'
 	return (
-		<section id="cta" className="bg-base-200 relative flex h-[50svh] items-center justify-center">
+		<section id="cta" className="bg-base-200 relative flex min-h-[50svh] items-center justify-center">
 			<Link className="flex w-fit justify-center" href={tel}>
 				<BlurText
 					text="Réservez votre séance d’essai au 06.49.81.02.80"
