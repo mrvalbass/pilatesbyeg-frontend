@@ -9,7 +9,7 @@ const HeroSection = () => {
 				src="https://res.cloudinary.com/dmftxzhvh/video/upload/v1739554403/pilatesbyeg/hero-pilatesbyeg.mp4"
 			/>
 			<div className="bg-neutral/60 absolute -z-10 h-full w-full" />
-			<h1 className="text-neutral-content font-heading text-5xl md:text-6xl">Pilates by EG</h1>
+			<h1 className="text-neutral-content font-heading text-5xl md:text-6xl">Pilates by EG Logo</h1>
 		</section>
 	)
 }

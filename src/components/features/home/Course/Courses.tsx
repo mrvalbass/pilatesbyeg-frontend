@@ -119,7 +119,7 @@ const Courses = ({ handleClicks }: CourseProps) => {
 						'ROUTINE',
 						'ÉQUILIBRE',
 					]}
-					rotationInterval={5000}
+					rotationInterval={4000}
 					staggerDuration={0.025}
 					transition={{ type: 'spring', damping: 30, stiffness: 400 }}
 					initial={{ y: '100%' }}
