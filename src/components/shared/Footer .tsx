@@ -6,7 +6,7 @@ const Footer = () => {
 	const mail = typeof window !== undefined ? 'mailto:eliane-guillot@hotmail.fr' : '#cta'
 
 	return (
-		<footer className="bg-neutral text-neutral-content flex flex-col gap-12 px-20 py-16 md:flex-row md:gap-42">
+		<footer className="bg-neutral text-neutral-content flex flex-col gap-12 px-10 py-16 md:flex-row md:gap-42 md:px-20">
 			<aside>
 				<h1>Pilates by EG Logo</h1>
 				<p className="font-heading text-2xl">Pilates by EG</p>
