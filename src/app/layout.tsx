@@ -1,3 +1,4 @@
+import Footer from '@/components/shared/Footer '
 import Navbar from '@/components/shared/Navbar'
 import '@styles/globals.css'
 import type { Metadata } from 'next'
@@ -17,6 +18,7 @@ export default function RootLayout({
 			<body className={`font-body antialiased md:subpixel-antialiased`}>
 				<Navbar />
 				{children}
+				<Footer />
 			</body>
 		</html>
 	)
