@@ -28,7 +28,9 @@ const Courses = ({ handleClicks }: CourseProps) => {
 					className="rounded-box aspect-square object-cover"
 				/>
 				<div className="to-neutral rounded-box absolute top-0 h-full w-full bg-gradient-to-b from-transparent via-transparent" />
-				<p className="font-heading text-neutral-content absolute bottom-5 left-5 text-xl font-bold">Pilates</p>
+				<p className="font-heading text-neutral-content absolute bottom-5 left-5 text-xl font-bold">
+					Pilates <sup>ⓘ</sup>
+				</p>
 			</Card>
 			<div className="flex flex-col items-center gap-4 md:flex-row md:gap-2">
 				<p className="text-xl">Les principes du Pilates </p>
@@ -64,7 +66,7 @@ const Courses = ({ handleClicks }: CourseProps) => {
 				<div className="to-neutral rounded-box absolute top-0 h-full w-full bg-gradient-to-b from-transparent via-transparent" />
 				<p className="font-heading text-neutral-content absolute bottom-5 left-5 text-xl font-bold">
 					Cardio / <br />
-					Renforcement Musculaire
+					Renforcement Musculaire <sup>ⓘ</sup>
 				</p>
 			</Card>
 		</div>
