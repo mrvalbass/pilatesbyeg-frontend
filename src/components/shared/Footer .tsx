@@ -12,7 +12,7 @@ const Footer = () => {
 				<p className="font-heading text-2xl">Pilates by EG</p>
 			</aside>
 			<nav>
-				<h6 className="footer-title mb-2">Contact</h6>
+				<h6 className="footer-title mb-4">Contact</h6>
 				<div className="flex flex-col gap-4">
 					<Link href={tel} className="flex items-center gap-2">
 						<FaPhone /> 06.49.81.02.80

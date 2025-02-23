@@ -53,7 +53,7 @@ function Navbar() {
 				</div>
 				<div className="navbar-center">
 					<Link href={'/'} className="text-xl md:hidden">
-						Pilates by EG
+						Pilates by EG Logo
 					</Link>
 				</div>
 				<div className="navbar-end">
