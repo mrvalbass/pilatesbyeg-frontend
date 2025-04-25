@@ -1,5 +1,17 @@
+import HeroSection from '@/components/features/planning/Hero/HeroSection'
+import PlanningSection from '@/components/features/planning/Planning/PlanningSection'
+import UserSection from '@/components/features/planning/User/UserSection'
+import ActionSection from '@/components/shared/Action/ActionSection'
+
 function Planning() {
-	return <div className="flex h-screen w-full items-center justify-center">Planning</div>
+	return (
+		<>
+			<HeroSection />
+			<UserSection />
+			<PlanningSection />
+			<ActionSection />
+		</>
+	)
 }
 
 export default Planning

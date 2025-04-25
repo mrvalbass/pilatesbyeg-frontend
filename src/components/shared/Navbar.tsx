@@ -1,6 +1,7 @@
 'use client'
 
 import { useScrollTrigger } from '@/hooks/features/navbar'
+import useUserStore from '@/stores/user/store'
 import clsx from 'clsx'
 import Link from 'next/link'
 import { CSSProperties, useEffect, useRef } from 'react'
@@ -9,12 +10,16 @@ import { RiMenu4Fill } from 'react-icons/ri'
 
 function Navbar() {
 	const { scrollTrigger } = useScrollTrigger({})
+	const { role } = useUserStore()
 	const showNavbar = scrollTrigger === 'up'
 	const menuPopoverRef = useRef<HTMLUListElement | null>(null)
 
+	const closePopOver = () => {
+		menuPopoverRef.current?.hidePopover()
+	}
 	useEffect(() => {
 		if (!showNavbar && menuPopoverRef.current) {
-			menuPopoverRef.current.hidePopover()
+			closePopOver()
 		}
 	}, [showNavbar])
 
@@ -43,7 +48,13 @@ function Navbar() {
 						popover="auto"
 						id="menu-popover"
 						style={{ positionAnchor: '--menu' } as CSSProperties}
+						onClick={closePopOver}
 					>
+						<li>
+							<Link href={'/'} className="text-neutral-content">
+								Accueil
+							</Link>
+						</li>
 						<li>
 							<Link href={'/planning'} className="text-neutral-content">
 								Planning
@@ -59,13 +70,17 @@ function Navbar() {
 				<div className="navbar-end">
 					<div className="hidden items-center gap-4 md:flex">
 						<Link href={'/planning'}>Planning</Link>
-						<Link href={'#cta'} scroll className="btn btn-accent">
-							Réservez votre séance d&apos;essai
-						</Link>
+						{role === null && (
+							<Link href={'#cta'} scroll className="btn btn-accent">
+								Réservez votre séance d&apos;essai
+							</Link>
+						)}
 					</div>
-					<Link href={'/#cta'} scroll className="btn btn-accent md:hidden">
-						<MdSportsGymnastics size={20} />
-					</Link>
+					{role === null && (
+						<Link href={'/#cta'} scroll className="btn btn-accent md:hidden">
+							<MdSportsGymnastics size={20} />
+						</Link>
+					)}
 				</div>
 			</div>
 		</div>
