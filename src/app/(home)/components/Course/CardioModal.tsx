@@ -5,7 +5,7 @@ interface CardioModalProps {
 	handleCloseClick: () => void
 }
 
-const CardioModal = ({ isOpen, handleCloseClick }: CardioModalProps) => {
+function CardioModal({ isOpen, handleCloseClick }: CardioModalProps) {
 	return (
 		<Modal isOpen={isOpen} handleCloseClick={handleCloseClick}>
 			<h1 className="mb-6 text-2xl">Cardio / Renforcement Musculaire</h1>

@@ -2,7 +2,7 @@ import { AnimatedContent, FadeContent } from '@/components/ui'
 
 import { IdCard } from './IdCard'
 
-const AboutSection = () => {
+function AboutSection() {
 	return (
 		<section className="bg-base-200 flex min-h-[60svh] items-center p-12 md:p-24">
 			<div className="mx-auto flex h-full w-full max-w-[1500px] flex-col items-center justify-center gap-12 md:flex-row md:gap-24">

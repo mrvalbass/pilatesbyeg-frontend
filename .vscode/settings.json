@@ -22,5 +22,6 @@
 	"editor.codeActionsOnSave": {
 		"source.fixAll.eslint": "explicit",
 		"source.addMissingImports": "always"
-	}
+	},
+	"cSpell.words": ["AGFF", "BPJEPS", "Eliane"]
 }

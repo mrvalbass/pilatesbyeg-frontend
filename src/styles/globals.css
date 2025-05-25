@@ -41,6 +41,18 @@
 	--font-body: 'Lora', serif;
 }
 
+@theme {
+	--animate-banner: banner 40s linear infinite;
+	@keyframes banner {
+		0% {
+			translate: 0;
+		}
+		100% {
+			translate: -50%;
+		}
+	}
+}
+
 html {
 	scroll-behavior: smooth;
 }

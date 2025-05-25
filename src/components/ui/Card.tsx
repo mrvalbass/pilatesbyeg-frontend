@@ -1,3 +1,4 @@
+'use client'
 import { ReactNode } from 'react'
 
 interface CardProps {
@@ -8,9 +9,7 @@ interface CardProps {
 
 const Card = ({ children, className, onClick }: CardProps) => {
 	const handleClick = () => {
-		if (onClick) {
-			onClick()
-		}
+		onClick?.()
 	}
 
 	return (

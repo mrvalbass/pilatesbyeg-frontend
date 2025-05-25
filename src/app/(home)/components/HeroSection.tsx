@@ -1,4 +1,4 @@
-const HeroSection = () => {
+function HeroSection() {
 	return (
 		<section className="relative flex h-[75svh] items-center justify-center">
 			<video
