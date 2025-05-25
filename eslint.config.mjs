@@ -49,6 +49,14 @@ const eslintConfig = [
 			'@typescript-eslint/require-await': 'off',
 			'import/no-unresolved': 'error',
 			'import/named': 'error',
+			'import/order': [
+				'warn',
+				{
+					groups: ['builtin', 'external', 'internal'],
+					'newlines-between': 'always',
+					alphabetize: { order: 'asc', caseInsensitive: true },
+				},
+			],
 			'no-console': ['warn', { allow: ['warn', 'error'] }],
 			'jsx-a11y/click-events-have-key-events': 'off',
 			'jsx-a11y/no-noninteractive-element-interactions': 'off',

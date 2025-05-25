@@ -1,12 +1,13 @@
 'use client'
 
-import { useScrollTrigger } from '@/hooks/features/navbar'
-import useUserStore from '@/stores/user/store'
 import clsx from 'clsx'
 import Link from 'next/link'
 import { CSSProperties, useEffect, useRef } from 'react'
 import { MdSportsGymnastics } from 'react-icons/md'
 import { RiMenu4Fill } from 'react-icons/ri'
+
+import { useScrollTrigger } from '@/hooks'
+import { useUserStore } from '@/stores/user'
 
 function Navbar() {
 	const { scrollTrigger } = useScrollTrigger({})
@@ -87,4 +88,4 @@ function Navbar() {
 	)
 }
 
-export default Navbar
+export { Navbar }

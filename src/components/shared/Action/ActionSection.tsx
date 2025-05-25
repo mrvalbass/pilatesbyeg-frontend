@@ -1,7 +1,8 @@
-import BlurText from '@/components/ui/BlurText'
-import ClickSpark from '@/components/ui/ClickSpark'
 import Link from 'next/link'
-import ContactForm from './ContactForm'
+
+import { BlurText, ClickSpark } from '@/components/ui'
+
+import { ContactForm } from './ContactForm'
 
 const ActionSection = () => {
 	const tel = typeof window !== undefined ? 'tel:+33649810280' : '#cta'
@@ -26,4 +27,4 @@ const ActionSection = () => {
 	)
 }
 
-export default ActionSection
+export { ActionSection }

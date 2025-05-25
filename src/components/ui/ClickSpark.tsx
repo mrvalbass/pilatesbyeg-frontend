@@ -159,4 +159,4 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
 	return <canvas ref={canvasRef} className="absolute top-0 block h-full w-full select-none" onClick={handleClick} />
 }
 
-export default ClickSpark
+export { ClickSpark }

@@ -1,5 +1,6 @@
 import { FormEventHandler, useRef } from 'react'
-import Modal from '../Modal'
+
+import { Modal } from '@components/shared'
 
 interface ContactModalProps {
 	isOpen: boolean
@@ -46,4 +47,4 @@ const ContactModal = ({ isOpen, handleCloseClick }: ContactModalProps) => {
 	)
 }
 
-export default ContactModal
+export { ContactModal }
