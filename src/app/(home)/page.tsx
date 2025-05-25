@@ -1,10 +1,8 @@
-import AboutSection from '@/components/features/home/About/AboutSection'
-import CourseSection from '@/components/features/home/Course/CourseSection'
-import HeroSection from '@/components/features/home/Hero/HeroSection'
-import ReviewSection from '@/components/features/home/Review/ReviewSection'
-import ActionSection from '@/components/shared/Action/ActionSection'
+import { ActionSection } from '@/components/shared'
 
-function Home() {
+import { AboutSection, CourseSection, HeroSection, ReviewSection } from './components'
+
+export default function Home() {
 	return (
 		<>
 			<HeroSection />
@@ -15,5 +13,3 @@ function Home() {
 		</>
 	)
 }
-
-export default Home

@@ -1,7 +1,9 @@
 'use client'
-import FadeContent from '@/components/ui/FadeContent'
 import { useState } from 'react'
-import ContactModal from './ContactModal'
+
+import { FadeContent } from '@/components/ui'
+
+import { ContactModal } from './ContactModal'
 
 const ContactForm = () => {
 	const [contactModalIsOpen, setContactModalIsOpen] = useState(false)
@@ -29,4 +31,4 @@ const ContactForm = () => {
 	)
 }
 
-export default ContactForm
+export { ContactForm }

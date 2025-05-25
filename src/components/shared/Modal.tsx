@@ -22,4 +22,4 @@ const Modal = ({ children, className, isOpen, handleCloseClick }: ModalProps) =>
 	)
 }
 
-export default Modal
+export { Modal }

@@ -27,7 +27,7 @@ const springValues: SpringOptions = {
 	mass: 2,
 }
 
-export default function TiltedCard({
+function TiltedCard({
 	imageSrc,
 	altText = 'Tilted card image',
 	captionText = '',
@@ -160,3 +160,5 @@ export default function TiltedCard({
 		</figure>
 	)
 }
+
+export { TiltedCard }

@@ -24,6 +24,9 @@ jobs:
       - name: Check linter
         run: yarn lint
 
+      - name: Check Types
+        run: yarn type-check
+
       - name: Check format
         run: yarn format:check
 
