@@ -1,3 +1,5 @@
+'use client'
+
 import type { AnimationControls, TargetAndTransition, Transition, VariantLabels } from 'motion/react'
 import { AnimatePresence, motion } from 'motion/react'
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useState } from 'react'

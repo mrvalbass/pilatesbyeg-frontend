@@ -5,7 +5,7 @@ interface PilatesModalProps {
 	handleCloseClick: () => void
 }
 
-const PilatesModal = ({ isOpen, handleCloseClick }: PilatesModalProps) => {
+function PilatesModal({ isOpen, handleCloseClick }: PilatesModalProps) {
 	return (
 		<Modal isOpen={isOpen} handleCloseClick={handleCloseClick}>
 			<h1 className="mb-6 text-2xl">Pilates</h1>
