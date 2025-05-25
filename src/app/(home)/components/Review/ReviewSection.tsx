@@ -1,6 +1,12 @@
+'use client'
+
+import { Carousel } from '@/components/ui'
+import { useIsMobile } from '@/hooks'
+
 import { ReviewCard } from './ReviewCard'
 
 function ReviewSection() {
+	const isMobile = useIsMobile()
 	const reviews = [
 		{
 			reviewer: 'Marine F.',
@@ -26,13 +32,29 @@ function ReviewSection() {
 			score: 5,
 		},
 	]
+
+	const carouselItems = reviews.map((review, index) => ({
+		title: review.reviewer,
+		description: review.review,
+		id: index,
+		score: review.score,
+	}))
+
 	return (
 		<section className="bg-base-200 min-h-[20svh] overflow-hidden py-24">
-			<div className="animate-banner flex w-fit items-center gap-24 px-12">
-				{[...reviews, ...reviews].map((review, index) => (
-					<ReviewCard key={`${review.reviewer}-${index}`} {...review} />
-				))}
-			</div>
+			<h2 className="font-heading text-center text-3xl">Avis</h2>
+
+			{isMobile ? (
+				<div className="flex items-center justify-center p-6">
+					<Carousel items={carouselItems} autoplay autoplayDelay={5000} />
+				</div>
+			) : (
+				<div className="animate-banner flex w-fit items-center gap-24 px-12">
+					{[...reviews, ...reviews].map((review, index) => (
+						<ReviewCard key={`${review.reviewer}-${index}`} {...review} />
+					))}
+				</div>
+			)}
 		</section>
 	)
 }

@@ -1,6 +1,7 @@
 export { AnimatedContent } from './AnimatedContent'
 export { BlurText } from './BlurText'
 export { Card } from './Card'
+export { Carousel } from './Carousel'
 export { ClickSpark } from './ClickSpark'
 export { FadeContent } from './FadeContent'
 export { RotatingText } from './RotatingText'
