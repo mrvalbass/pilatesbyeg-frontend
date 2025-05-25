@@ -84,34 +84,36 @@ function Carousel({
 
 	const containerRef = useRef<HTMLDivElement>(null)
 	useEffect(() => {
-		if (pauseOnHover && containerRef.current) {
-			const container = containerRef.current
-			const handleMouseEnter = () => setIsHovered(true)
-			const handleMouseLeave = () => setIsHovered(false)
-			container.addEventListener('mouseenter', handleMouseEnter)
-			container.addEventListener('mouseleave', handleMouseLeave)
-			return () => {
-				container.removeEventListener('mouseenter', handleMouseEnter)
-				container.removeEventListener('mouseleave', handleMouseLeave)
-			}
+		if (!(pauseOnHover && containerRef.current)) {
+			return
+		}
+		const container = containerRef.current
+		const handleMouseEnter = () => setIsHovered(true)
+		const handleMouseLeave = () => setIsHovered(false)
+		container.addEventListener('mouseenter', handleMouseEnter)
+		container.addEventListener('mouseleave', handleMouseLeave)
+		return () => {
+			container.removeEventListener('mouseenter', handleMouseEnter)
+			container.removeEventListener('mouseleave', handleMouseLeave)
 		}
 	}, [pauseOnHover])
 
 	useEffect(() => {
-		if (autoplay && (!pauseOnHover || !isHovered)) {
-			const timer = setInterval(() => {
-				setCurrentIndex(prev => {
-					if (prev === items.length - 1 && loop) {
-						return prev + 1 // Animate to clone.
-					}
-					if (prev === carouselItems.length - 1) {
-						return loop ? 0 : prev
-					}
-					return prev + 1
-				})
-			}, autoplayDelay)
-			return () => clearInterval(timer)
+		if (!(autoplay && (!pauseOnHover || !isHovered))) {
+			return
 		}
+		const timer = setInterval(() => {
+			setCurrentIndex(prev => {
+				if (prev === items.length - 1 && loop) {
+					return prev + 1 // Animate to clone.
+				}
+				if (prev === carouselItems.length - 1) {
+					return loop ? 0 : prev
+				}
+				return prev + 1
+			})
+		}, autoplayDelay)
+		return () => clearInterval(timer)
 	}, [autoplay, autoplayDelay, isHovered, loop, items.length, carouselItems.length, pauseOnHover])
 
 	const effectiveTransition = isResetting ? { duration: 0 } : SPRING_OPTIONS
