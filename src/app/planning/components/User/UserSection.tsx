@@ -4,7 +4,7 @@ import { useUserStore } from '@/stores/user'
 import { UserRole } from '@/stores/user/types'
 
 import { UserCredit } from './UserCredit'
-import { UserLogin } from './UserLogin'
+import { UserLogin } from './UserLogin/UserLogin'
 import { UserProfile } from './UserProfile'
 
 const UserSection = () => {

@@ -5,14 +5,10 @@ interface UserStore {
 	credits: number
 }
 
-interface UserActions {
-	clearStore: () => void
-}
-
 enum UserRole {
 	ADMIN = 'admin',
 	USER = 'user',
 }
 
 export { UserRole }
-export type { UserActions, UserStore }
+export type { UserStore }

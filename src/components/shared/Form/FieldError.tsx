@@ -1,0 +1,16 @@
+import { AnyFieldMeta } from '@tanstack/react-form'
+import { ZodError } from 'zod'
+
+interface FieldErrorProps {
+	meta: AnyFieldMeta
+}
+
+export function FieldError({ meta }: FieldErrorProps) {
+	if (!meta.isTouched) return
+
+	return meta.errors.map(({ message }: ZodError, index) => (
+		<p key={index} className="text-error">
+			{message}
+		</p>
+	))
+}

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 
+import { ClientLayout } from '@/components/libs/ClientLayout'
 import { Footer, Navbar } from '@/components/shared'
 import '@styles/globals.css'
 
@@ -16,9 +17,11 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={`font-body antialiased md:subpixel-antialiased`}>
-				<Navbar />
-				{children}
-				<Footer />
+				<ClientLayout>
+					<Navbar />
+					{children}
+					<Footer />
+				</ClientLayout>
 			</body>
 		</html>
 	)
