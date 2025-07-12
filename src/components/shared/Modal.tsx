@@ -5,19 +5,19 @@ interface ModalProps {
 	children: ReactNode
 	className?: string
 	isOpen: boolean
-	handleCloseClick: () => void
+	onClose: () => void
 }
 
-const Modal = ({ children, className, isOpen, handleCloseClick }: ModalProps) => {
+const Modal = ({ children, className, isOpen, onClose }: ModalProps) => {
 	return (
 		<dialog className="modal" open={isOpen}>
 			<div className={`modal-box ${className}`}>
 				<div className="absolute top-3 right-3">
-					<IoIosCloseCircleOutline className="cursor-pointer" onClick={handleCloseClick} size={25} />
+					<IoIosCloseCircleOutline className="cursor-pointer" onClick={onClose} size={25} />
 				</div>
 				{children}
 			</div>
-			<button className="modal-backdrop bg-neutral/60" onClick={handleCloseClick} />
+			<button className="modal-backdrop bg-neutral/60" onClick={onClose} />
 		</dialog>
 	)
 }

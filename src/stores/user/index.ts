@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-import { UserActions, UserRole, type UserStore } from './types'
+import { type UserStore } from './types'
 
 const defaultUserStore: UserStore = {
 	firstName: null,
@@ -9,13 +9,10 @@ const defaultUserStore: UserStore = {
 	credits: 0,
 }
 
-const useUserStore = create<UserStore & UserActions>(set => ({
-	...defaultUserStore,
-	firstName: 'Jean-Jacques',
-	lastName: null,
-	role: UserRole.USER,
-	credits: 5,
-	clearStore: () => set(defaultUserStore),
-}))
+const useUserStore = create<UserStore>(() => defaultUserStore)
 
-export { useUserStore }
+function clearStore() {
+	useUserStore.setState(() => defaultUserStore)
+}
+
+export { clearStore, useUserStore }

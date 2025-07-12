@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
+import { UserPasswordModal } from '../UserPasswordModal'
 import { UserLoginModal } from './UserLoginModal'
-import { UserPasswordModal } from './UserPasswordModal'
 
 const UserLogin = () => {
 	const [userLoginModalIsOpen, setUserLoginModalIsOpen] = useState(false)
@@ -10,7 +10,7 @@ const UserLogin = () => {
 		setUserLoginModalIsOpen(true)
 	}
 
-	const handleUserLoginCloseClick = () => {
+	const handleUserLoginClose = () => {
 		setUserLoginModalIsOpen(false)
 	}
 
@@ -20,14 +20,14 @@ const UserLogin = () => {
 		setUserPasswordModalIsOpen(true)
 	}
 
-	const handleUserPasswordCloseClick = () => {
+	const handleUserPasswordClose = () => {
 		setUserPasswordModalIsOpen(false)
 	}
 
 	return (
 		<>
-			<UserLoginModal isOpen={userLoginModalIsOpen} handleCloseClick={handleUserLoginCloseClick} />
-			<UserPasswordModal isOpen={userPasswordModalIsOpen} handleCloseClick={handleUserPasswordCloseClick} />
+			<UserLoginModal isOpen={userLoginModalIsOpen} onClose={handleUserLoginClose} />
+			<UserPasswordModal isOpen={userPasswordModalIsOpen} onClose={handleUserPasswordClose} />
 			<div className="flex gap-4">
 				<button className="btn text-base" onClick={handleUserLoginClick}>
 					Se connecter
