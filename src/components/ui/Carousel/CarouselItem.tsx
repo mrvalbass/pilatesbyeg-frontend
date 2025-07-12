@@ -1,3 +1,4 @@
+import type { Transition } from 'framer-motion'
 import { motion, MotionValue, useTransform } from 'motion/react'
 import { FaStar } from 'react-icons/fa6'
 
@@ -10,15 +11,7 @@ interface CarouselItemProps {
 	x: MotionValue<number>
 	round: boolean
 	itemWidth: number
-	effectiveTransition:
-		| {
-				type: string
-				stiffness: number
-				damping: number
-		  }
-		| {
-				duration: number
-		  }
+	effectiveTransition: Transition
 }
 function CarouselItem({ item, index, trackItemOffset, x, round, itemWidth, effectiveTransition }: CarouselItemProps) {
 	const range = [-(index + 1) * trackItemOffset, -index * trackItemOffset, -(index - 1) * trackItemOffset]
