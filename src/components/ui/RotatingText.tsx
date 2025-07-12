@@ -1,6 +1,6 @@
 'use client'
 
-import type { AnimationControls, TargetAndTransition, Transition, VariantLabels } from 'motion/react'
+import type { TargetAndTransition, Transition, VariantLabels } from 'motion/react'
 import { AnimatePresence, motion } from 'motion/react'
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useState } from 'react'
 
@@ -23,7 +23,7 @@ export interface RotatingTextProps
 	texts: string[]
 	transition?: Transition
 	initial?: boolean | VariantLabels | TargetAndTransition
-	animate?: boolean | VariantLabels | TargetAndTransition | AnimationControls
+	animate?: boolean | VariantLabels | TargetAndTransition
 	exit?: VariantLabels | TargetAndTransition
 	animatePresenceMode?: 'sync' | 'wait'
 	animatePresenceInitial?: boolean

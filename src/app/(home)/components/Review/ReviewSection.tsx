@@ -42,8 +42,6 @@ function ReviewSection() {
 
 	return (
 		<section className="bg-base-200 min-h-[20svh] overflow-hidden py-24">
-			<h2 className="font-heading text-center text-3xl">Avis</h2>
-
 			{isMobile ? (
 				<div className="flex items-center justify-center p-6">
 					<Carousel items={carouselItems} autoplay autoplayDelay={5000} />
