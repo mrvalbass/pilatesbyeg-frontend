@@ -2,12 +2,12 @@ import { Modal } from '@/components/shared'
 
 interface PilatesModalProps {
 	isOpen: boolean
-	handleCloseClick: () => void
+	onClose: () => void
 }
 
-function PilatesModal({ isOpen, handleCloseClick }: PilatesModalProps) {
+function PilatesModal({ isOpen, onClose }: PilatesModalProps) {
 	return (
-		<Modal isOpen={isOpen} handleCloseClick={handleCloseClick}>
+		<Modal isOpen={isOpen} onClose={onClose}>
 			<h1 className="mb-6 text-2xl">Pilates</h1>
 			<p>
 				Créée par Joseph Pilates en 1926, le Pilates connaît beaucoup de succès auprès des danseurs et athlètes. <br />A

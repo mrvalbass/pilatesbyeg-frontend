@@ -12,13 +12,13 @@ const ContactForm = () => {
 		setContactModalIsOpen(true)
 	}
 
-	const handleContactCloseClick = () => {
+	const handleContactClose = () => {
 		setContactModalIsOpen(false)
 	}
 
 	return (
 		<>
-			<ContactModal isOpen={contactModalIsOpen} handleCloseClick={handleContactCloseClick} />
+			<ContactModal isOpen={contactModalIsOpen} onClose={handleContactClose} />
 			<FadeContent blur duration={200} delay={1200} threshold={0} className="relative z-1">
 				<button
 					className="text-neutral-content font-heading bg-neutral rounded-box cursor-pointer px-10 py-5 text-xl font-bold shadow-2xl transition-transform hover:scale-105 active:scale-95 md:text-3xl"

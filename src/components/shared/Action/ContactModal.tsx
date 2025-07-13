@@ -4,19 +4,19 @@ import { Modal } from '@components/shared'
 
 interface ContactModalProps {
 	isOpen: boolean
-	handleCloseClick: () => void
+	onClose: () => void
 }
 
-const ContactModal = ({ isOpen, handleCloseClick }: ContactModalProps) => {
+const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
 	const formRef = useRef<HTMLFormElement | null>(null)
 	const handleSubmit: FormEventHandler = e => {
 		e.preventDefault()
-		handleCloseClick()
+		onClose()
 		formRef.current?.reset()
 	}
 
 	return (
-		<Modal isOpen={isOpen} handleCloseClick={handleCloseClick}>
+		<Modal isOpen={isOpen} onClose={onClose}>
 			<h1 className="mb-6 text-2xl">Formulaire de contact</h1>
 			<form
 				className="bg-neutral rounded-box flex w-full min-w-[300px] flex-col gap-5 p-10 shadow-2xl"

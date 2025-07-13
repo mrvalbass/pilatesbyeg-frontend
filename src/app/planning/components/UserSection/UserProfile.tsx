@@ -2,12 +2,12 @@ import clsx from 'clsx'
 import { CSSProperties, useState } from 'react'
 import { FaChevronDown } from 'react-icons/fa6'
 
-import { useUserStore } from '@/stores/user'
+import { clearStore, useUserStore } from '@/stores/user'
 // Comments are the implementation of the css position anchoring
 // which is not currently supported in all major browsers
 
 const UserProfile = () => {
-	const { firstName, clearStore } = useUserStore()
+	const firstName = useUserStore(state => state.firstName)
 	const [menuIsOpen, setMenuIsOpen] = useState(false)
 	// const userMenuPopoverRef = useRef<HTMLUListElement | null>(null)
 

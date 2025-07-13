@@ -1,3 +1,4 @@
+import { NestHttpError } from '@/types/api/error.type'
 import { paths } from '@/types/api/types.generated'
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3100'
@@ -7,12 +8,22 @@ export async function api<TPath extends keyof paths, TMethod extends keyof paths
 	method: TMethod,
 	options?: {
 		body?: paths[TPath][TMethod] extends { requestBody: { content: { 'application/json': infer R } } } ? R : unknown
+		query?: paths[TPath][TMethod] extends { parameters: { query: infer R } } ? R : unknown
 		token?: string
 	}
 ): Promise<
 	paths[TPath][TMethod] extends { responses: { 200: { content: { 'application/json': infer R } } } } ? R : unknown
 > {
-	const res = await fetch(`${API_URL}${path}`, {
+	const url = new URL(`${API_URL}${path}`)
+	if (options?.query) {
+		for (const [key, value] of Object.entries(options.query)) {
+			if (value !== undefined && typeof value === 'string') {
+				url.searchParams.append(key, value)
+			}
+		}
+	}
+
+	const res = await fetch(url, {
 		method: String(method).toUpperCase(),
 		headers: {
 			'Content-Type': 'application/json',
@@ -23,7 +34,8 @@ export async function api<TPath extends keyof paths, TMethod extends keyof paths
 	})
 
 	if (!res.ok) {
-		throw new Error('API Error: ' + res.statusText)
+		const error = (await res.json()) as NestHttpError
+		throw new Error(typeof error.message === 'string' ? error.message : error.message.join(', '))
 	}
 
 	return res.json() as paths[TPath][TMethod] extends {

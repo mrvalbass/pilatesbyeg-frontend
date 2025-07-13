@@ -101,6 +101,14 @@ export interface components {
 			email: string
 			password: string
 		}
+		SignInResponse: {
+			/** @description JWT access token */
+			accessToken: boolean
+			user: components['schemas']['CreateUserResponse']
+		}
+		VerifyEmailResponse: {
+			emailVerified: boolean
+		}
 	}
 	responses: never
 	parameters: never
@@ -167,7 +175,9 @@ export interface operations {
 				headers: {
 					[name: string]: unknown
 				}
-				content?: never
+				content: {
+					'application/json': components['schemas']['SignInResponse']
+				}
 			}
 		}
 	}
@@ -186,7 +196,9 @@ export interface operations {
 				headers: {
 					[name: string]: unknown
 				}
-				content?: never
+				content: {
+					'application/json': components['schemas']['VerifyEmailResponse']
+				}
 			}
 		}
 	}

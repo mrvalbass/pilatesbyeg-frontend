@@ -16,7 +16,7 @@ function CourseSection() {
 		setPilatesModalIsOpen(true)
 	}
 
-	const handlePilatesCloseClick = () => {
+	const handlePilatesClose = () => {
 		setPilatesModalIsOpen(false)
 	}
 
@@ -24,7 +24,7 @@ function CourseSection() {
 		setCardioModalIsOpen(true)
 	}
 
-	const handleCardioCloseClick = () => {
+	const handleCardioClose = () => {
 		setCardioModalIsOpen(false)
 	}
 
@@ -56,8 +56,8 @@ function CourseSection() {
 
 	return (
 		<>
-			<PilatesModal isOpen={pilatesModalIsOpen} handleCloseClick={handlePilatesCloseClick} />
-			<CardioModal isOpen={cardioModalIsOpen} handleCloseClick={handleCardioCloseClick} />
+			<PilatesModal isOpen={pilatesModalIsOpen} onClose={handlePilatesClose} />
+			<CardioModal isOpen={cardioModalIsOpen} onClose={handleCardioClose} />
 			<section className="bg-base-200 min-h-[60svh] p-12">
 				<div className="mx-auto flex h-full w-full max-w-[1500px] flex-col items-center justify-around gap-12">
 					<h2 className="font-heading text-3xl">Les disciplines</h2>
