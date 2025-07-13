@@ -6,7 +6,7 @@ import '@styles/globals.css'
 
 export const metadata: Metadata = {
 	title: 'Pilates by EG',
-	description: 'Venez découvrir le pilates dans une ambiance chaleuresue proche de chez vous',
+	description: 'Venez découvrir le pilates dans une ambiance chaleureuse proche de chez vous',
 }
 
 export default function RootLayout({

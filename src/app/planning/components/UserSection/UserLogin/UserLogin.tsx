@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
-import { UserPasswordModal } from '../UserPasswordModal'
 import { UserLoginModal } from './UserLoginModal'
+import { UserPasswordModal } from './UserPasswordModal'
 
 const UserLogin = () => {
 	const [userLoginModalIsOpen, setUserLoginModalIsOpen] = useState(false)

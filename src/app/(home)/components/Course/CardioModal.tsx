@@ -2,12 +2,12 @@ import { Modal } from '@/components/shared'
 
 interface CardioModalProps {
 	isOpen: boolean
-	handleCloseClick: () => void
+	onClose: () => void
 }
 
-function CardioModal({ isOpen, handleCloseClick }: CardioModalProps) {
+function CardioModal({ isOpen, onClose }: CardioModalProps) {
 	return (
-		<Modal isOpen={isOpen} handleCloseClick={handleCloseClick}>
+		<Modal isOpen={isOpen} onClose={onClose}>
 			<h1 className="mb-6 text-2xl">Cardio / Renforcement Musculaire</h1>
 			<p>
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, mollitia. Dignissimos quo suscipit illo ex non

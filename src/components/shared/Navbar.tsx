@@ -78,7 +78,7 @@ function Navbar() {
 						)}
 					</div>
 					{role === null && (
-						<Link href={'/#cta'} scroll className="btn btn-accent md:hidden">
+						<Link href={'#cta'} scroll className="btn btn-accent md:hidden">
 							<MdSportsGymnastics size={20} />
 						</Link>
 					)}

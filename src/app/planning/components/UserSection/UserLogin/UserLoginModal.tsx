@@ -17,7 +17,7 @@ const loginSchema = z.object({
 })
 
 const UserLoginModal = ({ isOpen, onClose }: UserLoginModalProps) => {
-	const signUp = useMutation({
+	const { mutateAsync } = useMutation({
 		mutationKey: ['signIn'],
 		mutationFn: async (values: components['schemas']['SignInBody']) => api('/auth/sign-in', 'post', { body: values }),
 	})
@@ -27,9 +27,15 @@ const UserLoginModal = ({ isOpen, onClose }: UserLoginModalProps) => {
 			email: '',
 			password: '',
 		},
-		onSubmit: ({ value }) => {
-			console.log(value)
-			signUp.mutate(value)
+		onSubmit: async ({ value }) => {
+			try {
+				const data = await mutateAsync(value)
+				console.log(data)
+
+				onClose()
+			} catch (error) {
+				console.error(error)
+			}
 		},
 		validators: {
 			onChangeAsync: loginSchema,
@@ -45,7 +51,6 @@ const UserLoginModal = ({ isOpen, onClose }: UserLoginModalProps) => {
 				onSubmit={e => {
 					e.preventDefault()
 					e.stopPropagation()
-					console.log('test')
 
 					void form.handleSubmit()
 				}}

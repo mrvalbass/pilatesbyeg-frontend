@@ -11,8 +11,12 @@ const defaultUserStore: UserStore = {
 
 const useUserStore = create<UserStore>(() => defaultUserStore)
 
+function setUser(user: Partial<UserStore>) {
+	useUserStore.setState(state => ({ ...state, ...user }))
+}
+
 function clearStore() {
 	useUserStore.setState(() => defaultUserStore)
 }
 
-export { clearStore, useUserStore }
+export { clearStore, setUser, useUserStore }
