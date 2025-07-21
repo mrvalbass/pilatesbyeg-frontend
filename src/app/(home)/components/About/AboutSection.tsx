@@ -10,7 +10,7 @@ function AboutSection() {
 					<AnimatedContent distance={50} animateOpacity={false} threshold={0.8}>
 						<article className="h-full basis-1/2">
 							<h1 className="font-heading text-2xl">Le concept</h1>
-							<p className="mt-6">
+							<p className="mt-6 text-balance">
 								Cours de Pilates et de Renforcement musculaire <br />
 								<br />
 								Les cours de Pilates sont proposés à mon domicile, dans un cadre calme et chaleureux, propice au travail

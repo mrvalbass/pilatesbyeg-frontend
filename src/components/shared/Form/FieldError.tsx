@@ -8,9 +8,11 @@ interface FieldErrorProps {
 export function FieldError({ meta }: FieldErrorProps) {
 	if (!meta.isTouched) return
 
-	return meta.errors.map(({ message }: ZodError, index) => (
-		<p key={index} className="text-error">
-			{message}
-		</p>
-	))
+	return meta.errors.map((error: ZodError | string, index) => {
+		return (
+			<p key={index} className="text-error">
+				{typeof error === 'string' ? error : error.message}
+			</p>
+		)
+	})
 }

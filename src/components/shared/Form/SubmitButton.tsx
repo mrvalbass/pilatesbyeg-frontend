@@ -13,7 +13,7 @@ export function SubmitButton({ label }: SubmitButtonProps) {
 
 	const [isSubmitting, canSubmit] = useStore(form.store, state => [state.isSubmitting, state.canSubmit])
 	return (
-		<button className="btn btn-wide btn-accent self-center text-base" disabled={isSubmitting || !canSubmit}>
+		<button className="btn btn-wide btn-accent rounded-box self-center text-base" disabled={isSubmitting || !canSubmit}>
 			{isSubmitting ? <Spinner /> : label}
 		</button>
 	)

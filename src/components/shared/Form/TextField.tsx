@@ -14,7 +14,7 @@ export function TextField({ placeholder, type }: TextFieldProps) {
 	return (
 		<div className="flex w-full flex-col items-center">
 			<input
-				className="input input-accent bg-base-200"
+				className="input input-accent bg-base-200 w-full"
 				type={type}
 				placeholder={placeholder}
 				value={field.state.value}

@@ -1,6 +1,6 @@
 import { ActionSection } from '@/components/shared'
 
-import { HeroSection, PlanningSection, UserSection } from './components'
+import { HeroSection, PlanningSection, UserManagementSection, UserSection } from './components'
 
 export default function Planning() {
 	return (
@@ -8,6 +8,7 @@ export default function Planning() {
 			<HeroSection />
 			<UserSection />
 			<PlanningSection />
+			<UserManagementSection />
 			<ActionSection />
 		</>
 	)

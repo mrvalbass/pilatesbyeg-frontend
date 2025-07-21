@@ -29,7 +29,7 @@ const UserLogin = () => {
 			<UserLoginModal isOpen={userLoginModalIsOpen} onClose={handleUserLoginClose} />
 			<UserPasswordModal isOpen={userPasswordModalIsOpen} onClose={handleUserPasswordClose} />
 			<div className="flex gap-4">
-				<button className="btn text-base" onClick={handleUserLoginClick}>
+				<button className="btn rounded-box text-base" onClick={handleUserLoginClick}>
 					Se connecter
 				</button>
 				<button

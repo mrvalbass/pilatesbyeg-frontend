@@ -2,12 +2,13 @@ interface UserStore {
 	firstName: string | null
 	lastName: string | null
 	role: UserRole | null
-	credits: number
+	balance: number
+	accessToken: string | null
 }
 
 enum UserRole {
-	ADMIN = 'admin',
-	USER = 'user',
+	ADMIN = 'ADMIN',
+	USER = 'USER',
 }
 
 export { UserRole }
