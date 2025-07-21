@@ -37,7 +37,7 @@ function Navbar() {
 						Pilates by EG Logo
 					</Link>
 					<button
-						className="btn btn-neutral md:hidden"
+						className="btn btn-neutral rounded-box md:hidden"
 						popoverTarget="menu-popover"
 						style={{ anchorName: '--menu' } as CSSProperties}
 					>
@@ -72,13 +72,13 @@ function Navbar() {
 					<div className="hidden items-center gap-4 md:flex">
 						<Link href={'/planning'}>Planning</Link>
 						{role === null && (
-							<Link href={'#cta'} scroll className="btn btn-accent">
+							<Link href={'#cta'} scroll className="btn btn-accent rounded-box">
 								Réservez votre séance d&apos;essai
 							</Link>
 						)}
 					</div>
 					{role === null && (
-						<Link href={'#cta'} scroll className="btn btn-accent md:hidden">
+						<Link href={'#cta'} scroll className="btn btn-accent rounded-box md:hidden">
 							<MdSportsGymnastics size={20} />
 						</Link>
 					)}

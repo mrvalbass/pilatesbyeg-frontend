@@ -1,11 +1,19 @@
+'use client'
+
 import Link from 'next/link'
 
 import { BlurText, ClickSpark } from '@/components/ui'
+import { useUserStore } from '@/stores/user'
 
 import { ContactForm } from './ContactForm'
 
 const ActionSection = () => {
+	const role = useUserStore(state => state.role)
 	const tel = typeof window !== undefined ? 'tel:+33649810280' : '#cta'
+
+	if (role) {
+		return null
+	}
 
 	return (
 		<section

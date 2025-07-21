@@ -8,8 +8,7 @@ import { UserLogin } from './UserLogin'
 import { UserProfile } from './UserProfile'
 
 const UserSection = () => {
-	const { role } = useUserStore()
-
+	const role = useUserStore(state => state.role)
 	return (
 		<section className="bg-neutral text-neutral-content flex min-h-[10svh] items-center justify-between px-5 md:px-20">
 			{role ? <UserProfile /> : <UserLogin />}

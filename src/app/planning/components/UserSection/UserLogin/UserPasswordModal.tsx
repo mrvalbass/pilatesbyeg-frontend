@@ -33,7 +33,7 @@ const UserPasswordModal = ({ isOpen, onClose }: UserPasswordModalProps) => {
 					<div className="validator-hint">Veuillez entrer un email valide</div>
 				</div>
 
-				<button className="btn btn-wide btn-accent self-center text-base">Réinitialiser</button>
+				<button className="btn btn-wide btn-accent rounded-box self-center text-base">Réinitialiser</button>
 			</form>
 		</Modal>
 	)

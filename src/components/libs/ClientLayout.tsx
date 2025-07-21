@@ -1,7 +1,9 @@
 'use client'
 
+import { refreshAccessToken } from '@/stores/user'
 import { isServer, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { useEffect } from 'react'
 
 function makeQueryClient() {
 	return new QueryClient({
@@ -24,6 +26,16 @@ function getQueryClient() {
 
 export function ClientLayout({ children }: { children: React.ReactNode }) {
 	const queryClient = getQueryClient()
+
+	useEffect(() => {
+		void (async () => {
+			try {
+				await refreshAccessToken()
+			} catch (err) {
+				console.error('Failed to refresh auth token:', err)
+			}
+		})()
+	}, [])
 	return (
 		<QueryClientProvider client={queryClient}>
 			{children}

@@ -1,3 +1,4 @@
+import { getAccessToken, refreshAccessToken } from '@/stores/user'
 import { NestHttpError } from '@/types/api/error.type'
 import { paths } from '@/types/api/types.generated'
 
@@ -9,12 +10,12 @@ export async function api<TPath extends keyof paths, TMethod extends keyof paths
 	options?: {
 		body?: paths[TPath][TMethod] extends { requestBody: { content: { 'application/json': infer R } } } ? R : unknown
 		query?: paths[TPath][TMethod] extends { parameters: { query: infer R } } ? R : unknown
-		token?: string
 	}
 ): Promise<
 	paths[TPath][TMethod] extends { responses: { 200: { content: { 'application/json': infer R } } } } ? R : unknown
 > {
 	const url = new URL(`${API_URL}${path}`)
+
 	if (options?.query) {
 		for (const [key, value] of Object.entries(options.query)) {
 			if (value !== undefined && typeof value === 'string') {
@@ -23,15 +24,26 @@ export async function api<TPath extends keyof paths, TMethod extends keyof paths
 		}
 	}
 
-	const res = await fetch(url, {
-		method: String(method).toUpperCase(),
-		headers: {
-			'Content-Type': 'application/json',
-			...(options?.token && { Authorization: `Bearer ${options.token}` }),
-		},
-		body: options?.body ? JSON.stringify(options.body) : null,
-		credentials: 'include',
-	})
+	function getRequestOptions(): RequestInit {
+		const accessToken = getAccessToken()
+		return {
+			method: String(method).toUpperCase(),
+			headers: {
+				'Content-Type': 'application/json',
+				...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+			},
+			body: options?.body ? JSON.stringify(options.body) : null,
+		}
+	}
+
+	let res: Response
+
+	res = await fetch(url, getRequestOptions())
+
+	if (res.status === 401) {
+		await refreshAccessToken()
+		res = await fetch(url, getRequestOptions())
+	}
 
 	if (!res.ok) {
 		const error = (await res.json()) as NestHttpError
