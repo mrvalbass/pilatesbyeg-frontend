@@ -2,7 +2,7 @@ import { getAccessToken, refreshAccessToken } from '@/stores/user'
 import { NestHttpError } from '@/types/api/error.type'
 import { paths } from '@/types/api/types.generated'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3100'
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4100'
 
 export async function api<TPath extends keyof paths, TMethod extends keyof paths[TPath]>(
 	path: TPath,
@@ -24,10 +24,11 @@ export async function api<TPath extends keyof paths, TMethod extends keyof paths
 		}
 	}
 
-	function getRequestOptions(): RequestInit {
+	function getRequestOptions(path: string): RequestInit {
 		const accessToken = getAccessToken()
 		return {
 			method: String(method).toUpperCase(),
+			credentials: path.includes('auth') ? 'include' : 'same-origin',
 			headers: {
 				'Content-Type': 'application/json',
 				...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
@@ -38,11 +39,11 @@ export async function api<TPath extends keyof paths, TMethod extends keyof paths
 
 	let res: Response
 
-	res = await fetch(url, getRequestOptions())
+	res = await fetch(url, getRequestOptions(path))
 
 	if (res.status === 401) {
 		await refreshAccessToken()
-		res = await fetch(url, getRequestOptions())
+		res = await fetch(url, getRequestOptions(path))
 	}
 
 	if (!res.ok) {

@@ -1,9 +1,10 @@
 'use client'
 
-import { refreshAccessToken } from '@/stores/user'
 import { isServer, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { useEffect } from 'react'
+
+import { refreshAccessToken } from '@/stores/user'
 
 function makeQueryClient() {
 	return new QueryClient({
@@ -36,10 +37,13 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
 			}
 		})()
 	}, [])
+
 	return (
-		<QueryClientProvider client={queryClient}>
-			{children}
-			<ReactQueryDevtools initialIsOpen={false} />
-		</QueryClientProvider>
+		<>
+			<QueryClientProvider client={queryClient}>
+				{children}
+				<ReactQueryDevtools initialIsOpen={false} />
+			</QueryClientProvider>
+		</>
 	)
 }
