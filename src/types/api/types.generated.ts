@@ -4,257 +4,290 @@
  */
 
 export interface paths {
-    "/": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["AppController_getHello"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/auth/sign-up": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post: operations["AuthController_signUp"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/auth/sign-in": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post: operations["AuthController_signIn"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/auth/refresh-token": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post: operations["AuthController_refreshToken"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/auth/verify-email": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["AuthController_verifyEmail"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
+	'/': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get: operations['AppController_getHello']
+		put?: never
+		post?: never
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/auth/sign-up': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		post: operations['AuthController_signUp']
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/auth/sign-in': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		post: operations['AuthController_signIn']
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/auth/refresh-token': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		post: operations['AuthController_refreshToken']
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/auth/verify-email': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get: operations['AuthController_verifyEmail']
+		put?: never
+		post?: never
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/auth/sign-out': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put?: never
+		post: operations['AuthController_signOut']
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
 }
-export type webhooks = Record<string, never>;
+export type webhooks = Record<string, never>
 export interface components {
-    schemas: {
-        SignUpBody: {
-            /** @example Jean */
-            firstName: string;
-            /** @example Dupont */
-            lastName: string;
-            /** @example jean.dupont@gmail.com */
-            email: string;
-            password: string;
-        };
-        CreateUserResponse: {
-            /** @example Jean */
-            firstName: string;
-            /** @example Dupont */
-            lastName: string;
-            /** @example jean.dupont@gmail.com */
-            email: string;
-            /**
-             * @example USER
-             * @enum {string}
-             */
-            role: "USER" | "ADMIN";
-            /** Format: date-time */
-            createdAt: string;
-        };
-        SignInBody: {
-            /** @example jean.dupont@gmail.com */
-            email: string;
-            password: string;
-        };
-        GetUserResponse: {
-            id: number;
-            /** @example Jean */
-            firstName: string;
-            /** @example jean.dupont@gmail.com */
-            email: string;
-            /**
-             * @example USER
-             * @enum {string}
-             */
-            role: "USER" | "ADMIN";
-            /**
-             * @description User balance
-             * @example 10
-             */
-            balance: number;
-            emailVerified: boolean;
-            /** @description Hashed password */
-            password: string;
-        };
-        SignInResponse: {
-            /** @description JWT access token */
-            accessToken: string;
-            user: components["schemas"]["GetUserResponse"];
-        };
-        VerifyEmailResponse: {
-            emailVerified: boolean;
-        };
-    };
-    responses: never;
-    parameters: never;
-    requestBodies: never;
-    headers: never;
-    pathItems: never;
+	schemas: {
+		SignUpBody: {
+			/** @example Jean */
+			firstName: string
+			/** @example Dupont */
+			lastName: string
+			/** @example jean.dupont@gmail.com */
+			email: string
+			password: string
+		}
+		CreateUserResponse: {
+			/** @example Jean */
+			firstName: string
+			/** @example Dupont */
+			lastName: string
+			/** @example jean.dupont@gmail.com */
+			email: string
+			/**
+			 * @example USER
+			 * @enum {string}
+			 */
+			role: 'USER' | 'ADMIN'
+			/** Format: date-time */
+			createdAt: string
+		}
+		SignInBody: {
+			/** @example jean.dupont@gmail.com */
+			email: string
+			password: string
+		}
+		GetUserResponse: {
+			id: number
+			/** @example Jean */
+			firstName: string
+			/** @example jean.dupont@gmail.com */
+			email: string
+			/**
+			 * @example USER
+			 * @enum {string}
+			 */
+			role: 'USER' | 'ADMIN'
+			/**
+			 * @description User balance
+			 * @example 10
+			 */
+			balance: number
+			emailVerified: boolean
+			/** @description Hashed password */
+			password: string
+		}
+		SignInResponse: {
+			/** @description JWT access token */
+			accessToken: string
+			user: components['schemas']['GetUserResponse']
+		}
+		VerifyEmailResponse: {
+			emailVerified: boolean
+		}
+	}
+	responses: never
+	parameters: never
+	requestBodies: never
+	headers: never
+	pathItems: never
 }
-export type $defs = Record<string, never>;
+export type $defs = Record<string, never>
 export interface operations {
-    AppController_getHello: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    AuthController_signUp: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["SignUpBody"];
-            };
-        };
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["CreateUserResponse"];
-                };
-            };
-        };
-    };
-    AuthController_signIn: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["SignInBody"];
-            };
-        };
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["SignInResponse"];
-                };
-            };
-        };
-    };
-    AuthController_refreshToken: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["SignInResponse"];
-                };
-            };
-        };
-    };
-    AuthController_verifyEmail: {
-        parameters: {
-            query: {
-                token: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["VerifyEmailResponse"];
-                };
-            };
-        };
-    };
+	AppController_getHello: {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content?: never
+			}
+		}
+	}
+	AuthController_signUp: {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['SignUpBody']
+			}
+		}
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['CreateUserResponse']
+				}
+			}
+		}
+	}
+	AuthController_signIn: {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['SignInBody']
+			}
+		}
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['SignInResponse']
+				}
+			}
+		}
+	}
+	AuthController_refreshToken: {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['SignInResponse']
+				}
+			}
+		}
+	}
+	AuthController_verifyEmail: {
+		parameters: {
+			query: {
+				token: string
+			}
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['VerifyEmailResponse']
+				}
+			}
+		}
+	}
+	AuthController_signOut: {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		requestBody?: never
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown
+				}
+				content?: never
+			}
+		}
+	}
 }

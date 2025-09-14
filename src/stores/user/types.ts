@@ -4,6 +4,7 @@ interface UserStore {
 	role: UserRole | null
 	balance: number
 	accessToken: string | null
+	isLoading: boolean
 }
 
 enum UserRole {

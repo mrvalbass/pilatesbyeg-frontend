@@ -1,7 +1,9 @@
-import clsx from 'clsx'
+import { useMutation } from '@tanstack/react-query'
+import { clsx } from 'clsx'
 import { CSSProperties, useState } from 'react'
 import { FaChevronDown } from 'react-icons/fa6'
 
+import { api } from '@/api/fetcher'
 import { clearStore, useUserStore } from '@/stores/user'
 // Comments are the implementation of the css position anchoring
 // which is not currently supported in all major browsers
@@ -9,7 +11,11 @@ import { clearStore, useUserStore } from '@/stores/user'
 const UserProfile = () => {
 	const firstName = useUserStore(state => state.firstName)
 	const [menuIsOpen, setMenuIsOpen] = useState(false)
-	// const userMenuPopoverRef = useRef<HTMLUListElement | null>(null)
+
+	const { mutate } = useMutation({
+		mutationKey: ['signOut'],
+		mutationFn: async () => api('/auth/sign-out', 'post'),
+	})
 
 	const handleToggle = () => {
 		setMenuIsOpen(prev => !prev)
@@ -21,6 +27,7 @@ const UserProfile = () => {
 	}
 
 	const handleLogoutClick = () => {
+		mutate()
 		clearStore()
 		handleMenuElementClick()
 	}

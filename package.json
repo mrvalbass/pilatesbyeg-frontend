@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "next dev --turbopack",
+		"dev": "next dev --turbopack --port 4000",
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
@@ -15,7 +15,7 @@
 		"test:coverage": "jest --passWithNoTests --coverage",
 		"type-check": "tsc --noEmit",
 		"clean": "rm -rf .next out node_modules ./src/tests/coverage",
-		"type-generation": "openapi-typescript http://localhost:3100/api-json -o src/types/api/types.generated.ts prettier --write src/types/api/types.generated.ts"
+		"type-generation": "openapi-typescript http://localhost:4100/api-json -o src/types/api/types.generated.ts prettier --write src/types/api/types.generated.ts"
 	},
 	"dependencies": {
 		"@tanstack/react-form": "^1.20.0",

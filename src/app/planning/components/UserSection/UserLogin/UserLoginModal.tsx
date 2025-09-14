@@ -1,4 +1,4 @@
-import { GlobalFormValidationError } from '@tanstack/react-form'
+import type { GlobalFormValidationError } from '@tanstack/react-form'
 import { useMutation } from '@tanstack/react-query'
 import { useState } from 'react'
 import * as z from 'zod'

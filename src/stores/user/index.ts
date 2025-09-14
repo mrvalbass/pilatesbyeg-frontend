@@ -10,6 +10,7 @@ const defaultState: UserStore = {
 	role: null,
 	balance: 0,
 	accessToken: null,
+	isLoading: true,
 }
 
 const useUserStore = create<UserStore>(() => defaultState)
@@ -23,11 +24,12 @@ function setUser(user: Partial<UserStore>) {
 }
 
 function clearStore() {
-	useUserStore.setState(() => defaultState)
+	useUserStore.setState(state => ({ ...defaultState, isLoading: state.isLoading }))
 }
 
 async function refreshAccessToken() {
-	const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3100'
+	useUserStore.setState(state => ({ ...state, isLoading: true }))
+	const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4100'
 
 	const refreshRes = await fetch(`${API_URL}/auth/refresh-token`, {
 		method: 'POST',
@@ -37,11 +39,12 @@ async function refreshAccessToken() {
 	if (!refreshRes.ok) {
 		clearStore()
 		const error = (await refreshRes.json()) as NestHttpError
-		throw new Error(typeof error.message === 'string' ? error.message : error.message.join(', '))
+		console.error(typeof error.message === 'string' ? error.message : error.message.join(', '))
+		useUserStore.setState(state => ({ ...state, isLoading: false }))
 	}
 
 	const { accessToken, user } = (await refreshRes.json()) as { accessToken: string; user: Partial<UserStore> }
-	useUserStore.setState(state => ({ ...state, accessToken, ...user }))
+	useUserStore.setState(state => ({ ...state, accessToken, ...user, isLoading: false }))
 }
 
 export { clearStore, getAccessToken, refreshAccessToken, setUser, useUserStore }
