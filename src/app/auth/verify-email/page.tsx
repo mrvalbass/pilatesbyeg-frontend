@@ -27,9 +27,9 @@ export default function VerifyEmail() {
 
 	if (error || !data?.emailVerified) {
 		return (
-			<div className="bg-base-200 text-error flex min-h-[calc(100vh-232px)] flex-col items-center justify-center gap-8 text-2xl">
+			<div className="bg-base-200 text-error flex min-h-[calc(100vh-232px)] flex-col items-center justify-center gap-8 px-12 text-2xl">
 				<CiWarning size={64} />
-				<p>Nous n&apos;avons pas pu vérifier votre adresse email</p>
+				<p className="text-center">Nous n&apos;avons pas pu vérifier votre adresse email</p>
 				{error && <p>{error.message}</p>}
 			</div>
 		)
