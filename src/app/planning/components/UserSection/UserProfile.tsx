@@ -12,9 +12,9 @@ const UserProfile = () => {
 	const firstName = useUserStore(state => state.firstName)
 	const [menuIsOpen, setMenuIsOpen] = useState(false)
 
-	const { mutate } = useMutation({
+	const { mutateAsync } = useMutation({
 		mutationKey: ['signOut'],
-		mutationFn: async () => api('/auth/sign-out', 'post'),
+		mutationFn: async () => api('/auth/sign-out', 'get'),
 	})
 
 	const handleToggle = () => {
@@ -26,8 +26,8 @@ const UserProfile = () => {
 		// userMenuPopoverRef.current?.hidePopover()
 	}
 
-	const handleLogoutClick = () => {
-		mutate()
+	async function handleLogoutClick() {
+		await mutateAsync()
 		clearStore()
 		handleMenuElementClick()
 	}

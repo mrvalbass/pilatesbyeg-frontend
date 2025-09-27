@@ -47,6 +47,10 @@ const eslintConfig = [
 			'@typescript-eslint/explicit-module-boundary-types': 'off',
 			'@typescript-eslint/no-explicit-any': 'warn',
 			'@typescript-eslint/require-await': 'off',
+			'@typescript-eslint/no-misused-promises': [
+				'error',
+				{ checksVoidReturn: { arguments: false, attributes: false } },
+			],
 			'import/no-unresolved': 'error',
 			'import/named': 'error',
 			'import/order': [

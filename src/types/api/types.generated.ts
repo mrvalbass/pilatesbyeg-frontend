@@ -91,9 +91,9 @@ export interface paths {
 			path?: never
 			cookie?: never
 		}
-		get?: never
+		get: operations['AuthController_signOut']
 		put?: never
-		post: operations['AuthController_signOut']
+		post?: never
 		delete?: never
 		options?: never
 		head?: never
