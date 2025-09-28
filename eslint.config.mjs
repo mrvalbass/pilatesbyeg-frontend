@@ -35,7 +35,7 @@ const eslintConfig = [
 	...tseslint.configs.stylisticTypeChecked,
 	eslintReact.configs['recommended-typescript'],
 	eslintReact.configs['recommended-type-checked'],
-	...compat.extends('next/core-web-vitals', 'next/typescript', 'prettier'),
+	...compat.extends('next', 'prettier'),
 	{
 		languageOptions: {
 			parser: tsparser,
