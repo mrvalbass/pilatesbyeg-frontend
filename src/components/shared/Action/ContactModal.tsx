@@ -41,7 +41,9 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
 					placeholder="Votre question"
 					required
 				></textarea>
-				<button className="btn btn-wide btn-accent rounded-box self-center">Envoyer</button>
+				<button className="btn btn-wide btn-accent rounded-box self-center" type="submit">
+					Envoyer
+				</button>
 			</form>
 		</Modal>
 	)

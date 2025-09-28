@@ -2,7 +2,9 @@ import Link from 'next/link'
 import { FaEnvelope, FaPhone } from 'react-icons/fa6'
 
 const Footer = () => {
+	//eslint-disable-next-line
 	const tel = typeof window !== undefined ? 'tel:+33649810280' : '#cta'
+	//eslint-disable-next-line
 	const mail = typeof window !== undefined ? 'mailto:eliane-guillot@hotmail.fr' : '#cta'
 
 	return (

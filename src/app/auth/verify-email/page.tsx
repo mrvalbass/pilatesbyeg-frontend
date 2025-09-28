@@ -7,7 +7,7 @@ import { CiWarning } from 'react-icons/ci'
 import { api } from '@/api/fetcher'
 import { Spinner } from '@/components/shared/Spinner'
 
-import EmailVerificationSuccess from './components/EmailVerificationSuccess'
+import { SetPassword } from './components/SetPassword'
 
 export default function VerifyEmail() {
 	const token = useSearchParams().get('token')
@@ -35,5 +35,5 @@ export default function VerifyEmail() {
 		)
 	}
 
-	return <EmailVerificationSuccess />
+	return <SetPassword />
 }

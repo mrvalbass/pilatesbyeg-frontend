@@ -1,6 +1,5 @@
 import type { GlobalFormValidationError } from '@tanstack/react-form'
 import { useMutation } from '@tanstack/react-query'
-import { useState } from 'react'
 import * as z from 'zod'
 
 import { api } from '@/api/fetcher'
@@ -24,9 +23,7 @@ const loginSchema = z.object({
 type LoginValues = z.infer<typeof loginSchema>
 
 export function UserLoginModal({ isOpen, onClose }: UserLoginModalProps) {
-	const [isPasswordVisible, setIsPasswordVisible] = useState(false)
-
-	const { mutateAsync } = useMutation({
+	const { mutateAsync: signIn } = useMutation({
 		mutationKey: ['signIn'],
 		mutationFn: async (values: components['schemas']['SignInBody']) => api('/auth/sign-in', 'post', { body: values }),
 	})
@@ -42,7 +39,7 @@ export function UserLoginModal({ isOpen, onClose }: UserLoginModalProps) {
 		},
 		onSubmit: async ({ value, formApi }) => {
 			try {
-				const data = await mutateAsync(value)
+				const data = await signIn(value)
 				setUser({
 					firstName: data.user.firstName,
 					role: data.user.role as UserRole,
@@ -58,11 +55,6 @@ export function UserLoginModal({ isOpen, onClose }: UserLoginModalProps) {
 	function handleClose() {
 		onClose()
 		form.reset()
-		setIsPasswordVisible(false)
-	}
-
-	function handleEyeClick() {
-		setIsPasswordVisible(prev => !prev)
 	}
 
 	return (
@@ -78,15 +70,7 @@ export function UserLoginModal({ isOpen, onClose }: UserLoginModalProps) {
 				}}
 			>
 				<form.AppField name="email">{field => <field.TextField placeholder="Email" type="email" />}</form.AppField>
-				<form.AppField name="password">
-					{field => (
-						<field.PasswordField
-							placeholder="Mot de passe"
-							isPasswordVisible={isPasswordVisible}
-							onEyeClick={handleEyeClick}
-						/>
-					)}
-				</form.AppField>
+				<form.AppField name="password">{field => <field.PasswordField placeholder="Mot de passe" />}</form.AppField>
 				<form.AppForm>
 					<form.SubmitButton label="Se connecter" />
 				</form.AppForm>
@@ -107,10 +91,14 @@ function mapApiErrors(error: unknown): GlobalFormValidationError<LoginValues> {
 				form: "L'email et/ou le mot de passe sont incorrect(s)",
 				fields: {},
 			}
-
 		case 'EMAIL_NOT_VERIFIED':
 			return {
 				form: 'Votre adresse email n’a pas encore été vérifiée.',
+				fields: {},
+			}
+		case 'PASSWORD_HAS_NOT_BEEN_DEFINED':
+			return {
+				form: "Veuillez définir un mot de passe depuis l'email qui vous a été envoyé.",
 				fields: {},
 			}
 		default:

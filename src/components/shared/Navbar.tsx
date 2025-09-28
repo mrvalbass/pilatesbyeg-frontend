@@ -40,6 +40,7 @@ function Navbar() {
 						className="btn btn-neutral rounded-box md:hidden"
 						popoverTarget="menu-popover"
 						style={{ anchorName: '--menu' } as CSSProperties}
+						type="button"
 					>
 						<RiMenu4Fill size={20} />
 					</button>

@@ -2,7 +2,7 @@ import { getAccessToken, refreshAccessToken } from '@/stores/user'
 import { NestHttpError } from '@/types/api/error.type'
 import { paths } from '@/types/api/types.generated'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4100'
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4100'
 
 export async function api<TPath extends keyof paths, TMethod extends keyof paths[TPath]>(
 	path: TPath,
@@ -12,7 +12,7 @@ export async function api<TPath extends keyof paths, TMethod extends keyof paths
 		query?: paths[TPath][TMethod] extends { parameters: { query: infer R } } ? R : unknown
 	}
 ): Promise<
-	paths[TPath][TMethod] extends { responses: { 200: { content: { 'application/json': infer R } } } } ? R : unknown
+	paths[TPath][TMethod] extends { responses: { default: { content: { 'application/json': infer R } } } } ? R : unknown
 > {
 	const url = new URL(`${API_URL}${path}`)
 
@@ -52,7 +52,7 @@ export async function api<TPath extends keyof paths, TMethod extends keyof paths
 	}
 
 	return res.json() as paths[TPath][TMethod] extends {
-		responses: { 200: { content: { 'application/json': infer R } } }
+		responses: { default: { content: { 'application/json': infer R } } }
 	}
 		? R
 		: unknown

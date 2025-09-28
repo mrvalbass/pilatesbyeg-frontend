@@ -7,7 +7,7 @@ interface UserPasswordModalProps {
 	onClose: () => void
 }
 
-const UserPasswordModal = ({ isOpen, onClose }: UserPasswordModalProps) => {
+export function UserForgotPasswordModal({ isOpen, onClose }: UserPasswordModalProps) {
 	const formRef = useRef<HTMLFormElement | null>(null)
 	const handleSubmit: FormEventHandler = e => {
 		e.preventDefault()
@@ -33,10 +33,10 @@ const UserPasswordModal = ({ isOpen, onClose }: UserPasswordModalProps) => {
 					<div className="validator-hint">Veuillez entrer un email valide</div>
 				</div>
 
-				<button className="btn btn-wide btn-accent rounded-box self-center text-base">Réinitialiser</button>
+				<button className="btn btn-wide btn-accent rounded-box self-center text-base" type="submit">
+					Réinitialiser
+				</button>
 			</form>
 		</Modal>
 	)
 }
-
-export { UserPasswordModal }

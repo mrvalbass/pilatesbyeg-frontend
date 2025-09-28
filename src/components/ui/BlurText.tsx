@@ -78,10 +78,10 @@ const BlurText: React.FC<BlurTextProps> = ({
 	const springs = useSprings(
 		elements.length,
 		elements.map((_, i) => ({
-			from: animationFrom || defaultFrom,
+			from: animationFrom ?? defaultFrom,
 			to: inView
 				? async (next: (arg: AnimationProps) => Promise<void>) => {
-						for (const step of animationTo || defaultTo) {
+						for (const step of animationTo ?? defaultTo) {
 							await next(step)
 						}
 						animatedCount.current += 1
@@ -89,7 +89,7 @@ const BlurText: React.FC<BlurTextProps> = ({
 							onAnimationComplete()
 						}
 					}
-				: animationFrom || defaultFrom,
+				: (animationFrom ?? defaultFrom),
 			delay: i * delay,
 			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
 			config: { easing: easing as any },

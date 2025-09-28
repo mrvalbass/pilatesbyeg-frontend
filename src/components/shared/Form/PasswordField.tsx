@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6'
 
 import { useFieldContext } from '@/components/libs/tanstack-form/useAppForm'
@@ -6,12 +7,16 @@ import { FieldError } from './FieldError'
 
 interface TextFieldProps {
 	placeholder: string
-	isPasswordVisible: boolean
-	onEyeClick: () => void
 }
 
-export function PasswordField({ placeholder, isPasswordVisible, onEyeClick }: TextFieldProps) {
+export function PasswordField({ placeholder }: TextFieldProps) {
 	const field = useFieldContext<string>()
+	const [isPasswordVisible, setIsPasswordVisible] = useState(false)
+
+	function handleEyeClick() {
+		setIsPasswordVisible(prev => !prev)
+	}
+
 	return (
 		<div className="flex w-full flex-col items-center">
 			<div className="relative w-full">
@@ -26,7 +31,7 @@ export function PasswordField({ placeholder, isPasswordVisible, onEyeClick }: Te
 				<button
 					type="button"
 					className="text-accent absolute top-1/2 right-4 z-10 -translate-y-1/2"
-					onClick={onEyeClick}
+					onClick={handleEyeClick}
 				>
 					{isPasswordVisible ? <FaRegEyeSlash /> : <FaRegEye />}
 				</button>

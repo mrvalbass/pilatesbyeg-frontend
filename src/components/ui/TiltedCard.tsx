@@ -137,11 +137,11 @@ function TiltedCard({
 					}}
 				/>
 
-				{displayOverlayContent && overlayContent && (
+				{displayOverlayContent && overlayContent ? (
 					<motion.div className="absolute bottom-10 left-10 z-[2] [transform:translateZ(30px)] will-change-transform">
 						{overlayContent}
 					</motion.div>
-				)}
+				) : null}
 			</motion.div>
 
 			{showTooltip && (

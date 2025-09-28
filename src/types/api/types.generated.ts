@@ -100,6 +100,38 @@ export interface paths {
 		patch?: never
 		trace?: never
 	}
+	'/auth/set-password': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put: operations['AuthController_setPassword']
+		post?: never
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/auth/reset-password': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		get?: never
+		put: operations['AuthController_resetPassword']
+		post?: never
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
 }
 export type webhooks = Record<string, never>
 export interface components {
@@ -111,7 +143,6 @@ export interface components {
 			lastName: string
 			/** @example jean.dupont@gmail.com */
 			email: string
-			password: string
 		}
 		CreateUserResponse: {
 			/** @example Jean */
@@ -161,6 +192,21 @@ export interface components {
 		VerifyEmailResponse: {
 			emailVerified: boolean
 		}
+		BasicResponse: {
+			message: string
+		}
+		SetPasswordBody: {
+			token: string
+			password: string
+		}
+		ResetPasswordBody: {
+			oldPassword: string
+			newPassword: string
+		}
+		ResetPasswordResponse: {
+			/** @description JWT access token */
+			accessToken: string
+		}
 	}
 	responses: never
 	parameters: never
@@ -200,7 +246,7 @@ export interface operations {
 			}
 		}
 		responses: {
-			200: {
+			default: {
 				headers: {
 					[name: string]: unknown
 				}
@@ -223,7 +269,7 @@ export interface operations {
 			}
 		}
 		responses: {
-			200: {
+			default: {
 				headers: {
 					[name: string]: unknown
 				}
@@ -242,7 +288,7 @@ export interface operations {
 		}
 		requestBody?: never
 		responses: {
-			200: {
+			default: {
 				headers: {
 					[name: string]: unknown
 				}
@@ -263,7 +309,7 @@ export interface operations {
 		}
 		requestBody?: never
 		responses: {
-			200: {
+			default: {
 				headers: {
 					[name: string]: unknown
 				}
@@ -282,11 +328,59 @@ export interface operations {
 		}
 		requestBody?: never
 		responses: {
-			200: {
+			default: {
 				headers: {
 					[name: string]: unknown
 				}
-				content?: never
+				content: {
+					'application/json': components['schemas']['BasicResponse']
+				}
+			}
+		}
+	}
+	AuthController_setPassword: {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['SetPasswordBody']
+			}
+		}
+		responses: {
+			default: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['BasicResponse']
+				}
+			}
+		}
+	}
+	AuthController_resetPassword: {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['ResetPasswordBody']
+			}
+		}
+		responses: {
+			default: {
+				headers: {
+					[name: string]: unknown
+				}
+				content: {
+					'application/json': components['schemas']['ResetPasswordResponse']
+				}
 			}
 		}
 	}

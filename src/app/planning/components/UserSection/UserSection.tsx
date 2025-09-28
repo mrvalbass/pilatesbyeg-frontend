@@ -5,7 +5,7 @@ import { UserRole } from '@/stores/user/types'
 
 import { UserCredit } from './UserCredit'
 import { UserLogin } from './UserLogin'
-import { UserProfile } from './UserProfile'
+import { UserProfile } from './UserProfile/UserProfile'
 
 const UserSection = () => {
 	const role = useUserStore(state => state.role)

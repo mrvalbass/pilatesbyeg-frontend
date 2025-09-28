@@ -1,4 +1,4 @@
-import { AnyFieldMeta } from '@tanstack/react-form'
+import type { AnyFieldMeta } from '@tanstack/react-form'
 import { ZodError } from 'zod'
 
 interface FieldErrorProps {
@@ -10,7 +10,7 @@ export function FieldError({ meta }: FieldErrorProps) {
 
 	return meta.errors.map((error: ZodError | string, index) => {
 		return (
-			<p key={index} className="text-error">
+			<p key={index} className="text-error text-center">
 				{typeof error === 'string' ? error : error.message}
 			</p>
 		)

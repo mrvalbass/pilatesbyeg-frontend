@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
+import { UserForgotPasswordModal } from './UserForgotPasswordModal'
 import { UserLoginModal } from './UserLoginModal'
-import { UserPasswordModal } from './UserPasswordModal'
 
 const UserLogin = () => {
 	const [userLoginModalIsOpen, setUserLoginModalIsOpen] = useState(false)
@@ -14,7 +14,7 @@ const UserLogin = () => {
 		setUserLoginModalIsOpen(false)
 	}
 
-	const [userPasswordModalIsOpen, setUserPasswordModalIsOpen] = useState(false)
+	const [userForgotPasswordModalIsOpen, setUserPasswordModalIsOpen] = useState(false)
 
 	const handleUserPasswordClick = () => {
 		setUserPasswordModalIsOpen(true)
@@ -27,12 +27,13 @@ const UserLogin = () => {
 	return (
 		<>
 			<UserLoginModal isOpen={userLoginModalIsOpen} onClose={handleUserLoginClose} />
-			<UserPasswordModal isOpen={userPasswordModalIsOpen} onClose={handleUserPasswordClose} />
+			<UserForgotPasswordModal isOpen={userForgotPasswordModalIsOpen} onClose={handleUserPasswordClose} />
 			<div className="flex gap-4">
-				<button className="btn rounded-box text-base" onClick={handleUserLoginClick}>
+				<button type="button" className="btn rounded-box text-base" onClick={handleUserLoginClick}>
 					Se connecter
 				</button>
 				<button
+					type="button"
 					className="btn-ghost text-neutral-content/60 cursor-pointer text-sm underline"
 					onClick={handleUserPasswordClick}
 				>
