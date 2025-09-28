@@ -113,6 +113,11 @@ function mapApiErrors(error: unknown): GlobalFormValidationError<ResetPasswordVa
 				form: "L'ancien mot de passe est incorrect",
 				fields: {},
 			}
+		case 'ThrottlerException: Too Many Requests':
+			return {
+				form: "Trop d'essais, réessaie dans 1 min",
+				fields: {},
+			}
 		default:
 			return {
 				form: 'Une erreur est survenue. Veuillez réessayer.',

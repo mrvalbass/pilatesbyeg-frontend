@@ -98,6 +98,12 @@ function mapApiErrors(error: unknown): GlobalFormValidationError<SetPasswordValu
 				form: "Token d'authentification manquant",
 				fields: {},
 			}
+		case 'ThrottlerException: Too Many Requests':
+			return {
+				form: "Trop d'essais, réessaie dans 1 min",
+				fields: {},
+			}
+
 		default:
 			return {
 				form: `Une erreur est survenue.\n${Array.isArray(err.message) ? err.message.join(', ') : err.message}`,

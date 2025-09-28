@@ -65,7 +65,6 @@ export function UserLoginModal({ isOpen, onClose }: UserLoginModalProps) {
 				onSubmit={e => {
 					e.preventDefault()
 					e.stopPropagation()
-
 					void form.handleSubmit()
 				}}
 			>
@@ -99,6 +98,11 @@ function mapApiErrors(error: unknown): GlobalFormValidationError<LoginValues> {
 		case 'PASSWORD_HAS_NOT_BEEN_DEFINED':
 			return {
 				form: "Veuillez définir un mot de passe depuis l'email qui vous a été envoyé.",
+				fields: {},
+			}
+		case 'ThrottlerException: Too Many Requests':
+			return {
+				form: "Trop d'essais, réessaie dans 1 min",
 				fields: {},
 			}
 		default:
