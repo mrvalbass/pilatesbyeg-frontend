@@ -23,6 +23,7 @@ const ContactForm = () => {
 				<button
 					className="text-neutral-content font-heading bg-neutral rounded-box cursor-pointer px-10 py-5 text-xl font-bold shadow-2xl transition-transform hover:scale-105 active:scale-95 md:text-3xl"
 					onClick={handleContactClick}
+					type="button"
 				>
 					Une question ?
 				</button>

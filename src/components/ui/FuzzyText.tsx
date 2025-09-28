@@ -1,9 +1,7 @@
-'use client'
-
 import React, { useEffect, useRef } from 'react'
 
 interface FuzzyTextProps {
-	children: React.ReactNode
+	children: string
 	fontSize?: number | string
 	fontWeight?: string | number
 	fontFamily?: string
@@ -32,8 +30,9 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
 		if (!canvas) return
 
 		const init = async () => {
-			await document.fonts.ready
-
+			if (document.fonts) {
+				await document.fonts.ready
+			}
 			if (isCancelled) return
 
 			const ctx = canvas.getContext('2d')
@@ -55,9 +54,7 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
 				document.body.removeChild(temp)
 			}
 
-			const text = React.Children.toArray(children)
-				.map(child => (typeof child === 'string' || typeof child === 'number' ? child : ''))
-				.join('')
+			const text = children
 
 			const offscreen = document.createElement('canvas')
 			const offCtx = offscreen.getContext('2d')
@@ -146,9 +143,7 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
 			if (enableHover) {
 				canvas.addEventListener('mousemove', handleMouseMove)
 				canvas.addEventListener('mouseleave', handleMouseLeave)
-				canvas.addEventListener('touchmove', handleTouchMove, {
-					passive: false,
-				})
+				canvas.addEventListener('touchmove', handleTouchMove, { passive: false })
 				canvas.addEventListener('touchend', handleTouchEnd)
 			}
 

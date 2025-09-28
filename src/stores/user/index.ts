@@ -29,7 +29,7 @@ function clearStore() {
 
 async function refreshAccessToken() {
 	useUserStore.setState(state => ({ ...state, isLoading: true }))
-	const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4100'
+	const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4100'
 
 	const refreshRes = await fetch(`${API_URL}/auth/refresh-token`, {
 		method: 'POST',

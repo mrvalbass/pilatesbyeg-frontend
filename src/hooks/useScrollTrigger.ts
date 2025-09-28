@@ -30,7 +30,10 @@ function useScrollTrigger({ containerId }: UseScrollTriggerProps) {
 			}, 100)
 		}
 		container.current.addEventListener('scroll', handleScroll)
-		return () => container.current?.removeEventListener('scroll', handleScroll)
+		return () => {
+			if (timeout.current) clearTimeout(timeout.current)
+			return container.current?.removeEventListener('scroll', handleScroll)
+		}
 	}, [containerId])
 
 	return { scrollTrigger }

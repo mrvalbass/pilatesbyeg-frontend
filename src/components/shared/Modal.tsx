@@ -17,7 +17,7 @@ const Modal = ({ children, className, isOpen, onClose }: ModalProps) => {
 				</div>
 				{children}
 			</div>
-			<button className="modal-backdrop bg-neutral/60" onClick={onClose} />
+			<button className="modal-backdrop bg-neutral/60" onClick={onClose} type="button" />
 		</dialog>
 	)
 }

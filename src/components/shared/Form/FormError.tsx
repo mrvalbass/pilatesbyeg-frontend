@@ -3,5 +3,5 @@ interface FormErrorProps {
 }
 
 export function FormError({ error }: FormErrorProps) {
-	return <p className="text-error">{error}</p>
+	return <p className="text-error text-center">{error}</p>
 }

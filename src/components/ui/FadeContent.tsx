@@ -27,6 +27,7 @@ const FadeContent: React.FC<FadeContentProps> = ({
 	const ref = useRef<HTMLDivElement | null>(null)
 
 	useEffect(() => {
+		let timeout: NodeJS.Timeout
 		const element = ref.current
 		if (!element) return
 
@@ -34,7 +35,7 @@ const FadeContent: React.FC<FadeContentProps> = ({
 			([entry]) => {
 				if (entry?.isIntersecting) {
 					observer.unobserve(element)
-					setTimeout(() => {
+					timeout = setTimeout(() => {
 						setInView(true)
 					}, delay)
 				}
@@ -44,7 +45,10 @@ const FadeContent: React.FC<FadeContentProps> = ({
 
 		observer.observe(element)
 
-		return () => observer.disconnect()
+		return () => {
+			if (timeout) clearTimeout(timeout)
+			observer.disconnect()
+		}
 	}, [threshold, delay])
 
 	return (

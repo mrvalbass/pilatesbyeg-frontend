@@ -1,9 +1,13 @@
+import eslintReact from '@eslint-react/eslint-plugin'
 import { FlatCompat } from '@eslint/eslintrc'
+import eslint from '@eslint/js'
 import tsparser from '@typescript-eslint/parser'
 import imports from 'eslint-plugin-import'
 import jsxa11y from 'eslint-plugin-jsx-a11y'
-import prettier from 'eslint-plugin-prettier'
+import react from 'eslint-plugin-react'
+import reactHooks from 'eslint-plugin-react-hooks'
 import { dirname } from 'path'
+import tseslint from 'typescript-eslint'
 import { fileURLToPath } from 'url'
 
 const __filename = fileURLToPath(import.meta.url)
@@ -11,33 +15,37 @@ const __dirname = dirname(__filename)
 
 const compat = new FlatCompat({
 	baseDirectory: __dirname,
-	recommendedConfig: {},
 })
 
 const eslintConfig = [
-	...compat.config({
-		extends: [
-			'eslint:recommended',
-			'plugin:react/recommended',
-			'plugin:@typescript-eslint/recommended',
-			'plugin:@typescript-eslint/recommended-requiring-type-checking',
-			'next/core-web-vitals',
-			'next/typescript',
-			'plugin:jsx-a11y/recommended',
-			'plugin:import/recommended',
-			'plugin:import/typescript',
-			'prettier',
-		],
-	}),
 	{
-		ignores: ['*.config.mjs'],
+		ignores: [
+			'node_modules/**',
+			'.next/**',
+			'out/**',
+			'build/**',
+			'next-env.d.ts',
+			'*.config.*',
+			'**/*.generated.ts',
+			'.yarn/**',
+		],
+	},
+	eslint.configs.recommended,
+	...tseslint.configs.recommendedTypeChecked,
+	...tseslint.configs.stylisticTypeChecked,
+	eslintReact.configs['recommended-typescript'],
+	eslintReact.configs['recommended-type-checked'],
+	...compat.extends('next/core-web-vitals', 'next/typescript', 'prettier'),
+	{
 		languageOptions: {
 			parser: tsparser,
 			parserOptions: {
 				project: './tsconfig.json',
 			},
 		},
-		plugins: { prettier, jsxa11y, imports },
+	},
+	{
+		plugins: { jsxa11y, imports, 'react-hooks': reactHooks, react },
 		rules: {
 			'react/react-in-jsx-scope': 'off',
 			'react/prop-types': 'off',
@@ -64,7 +72,6 @@ const eslintConfig = [
 			'no-console': ['warn', { allow: ['warn', 'error'] }],
 			'jsx-a11y/click-events-have-key-events': 'off',
 			'jsx-a11y/no-noninteractive-element-interactions': 'off',
-			'prettier/prettier': 'warn',
 		},
 		settings: {
 			react: {

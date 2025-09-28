@@ -16,12 +16,14 @@ interface AnimatedContentProps {
 	delay?: number
 }
 
+const defaultConfig: SpringConfig = { tension: 50, friction: 25 }
+
 const AnimatedContent: React.FC<AnimatedContentProps> = ({
 	children,
 	distance = 100,
 	direction = 'vertical',
 	reverse = false,
-	config = { tension: 50, friction: 25 },
+	config = defaultConfig,
 	initialOpacity = 0,
 	animateOpacity = true,
 	scale = 1,
@@ -32,6 +34,7 @@ const AnimatedContent: React.FC<AnimatedContentProps> = ({
 	const ref = useRef<HTMLDivElement | null>(null)
 
 	useEffect(() => {
+		let timeout: NodeJS.Timeout
 		const element = ref.current
 		if (!element) return
 
@@ -39,7 +42,7 @@ const AnimatedContent: React.FC<AnimatedContentProps> = ({
 			([entry]) => {
 				if (entry?.isIntersecting) {
 					observer.unobserve(element)
-					setTimeout(() => {
+					timeout = setTimeout(() => {
 						setInView(true)
 					}, delay)
 				}
@@ -49,7 +52,10 @@ const AnimatedContent: React.FC<AnimatedContentProps> = ({
 
 		observer.observe(element)
 
-		return () => observer.disconnect()
+		return () => {
+			if (timeout) clearTimeout(timeout)
+			observer.disconnect()
+		}
 	}, [threshold, delay])
 
 	const directions: Record<'vertical' | 'horizontal', string> = {
