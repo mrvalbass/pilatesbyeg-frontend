@@ -1,10 +1,14 @@
+'use client'
+
 import type { GlobalFormValidationError } from '@tanstack/react-form'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { CiWarning } from 'react-icons/ci'
 import * as z from 'zod'
 
 import { api } from '@/api/fetcher'
 import { useAppForm } from '@/components/libs/tanstack-form/useAppForm'
+import { Spinner } from '@/components/shared/Spinner'
 import { NestHttpError } from '@/types/api/error.type'
 import { components } from '@/types/api/types.generated'
 
@@ -63,6 +67,29 @@ export function SetPassword() {
 			}
 		},
 	})
+
+	const { data, error, isLoading } = useQuery({
+		queryKey: ['verifyEmail'],
+		queryFn: () => api('/auth/verify-email', 'get', { query: { token: token ?? '' } }),
+	})
+
+	if (isLoading) {
+		return (
+			<div className="bg-base-200 text-error flex min-h-[calc(100vh-232px)] flex-col items-center justify-center gap-2 text-2xl">
+				<Spinner />
+			</div>
+		)
+	}
+
+	if (error || !data?.emailVerified) {
+		return (
+			<div className="bg-base-200 text-error flex min-h-[calc(100vh-232px)] flex-col items-center justify-center gap-8 px-12 text-2xl">
+				<CiWarning size={64} />
+				<p className="text-center">Nous n&apos;avons pas pu vérifier votre adresse email</p>
+				{error && <p>{error.message}</p>}
+			</div>
+		)
+	}
 
 	return (
 		<div className="bg-base-200 flex min-h-[calc(100vh-336px)] flex-col items-center justify-center gap-8 md:min-h-[calc(100vh-232px)]">
