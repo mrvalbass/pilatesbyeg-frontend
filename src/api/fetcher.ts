@@ -26,6 +26,8 @@ export async function api<TPath extends keyof paths, TMethod extends keyof paths
 
 	function getRequestOptions(path: string): RequestInit {
 		const accessToken = getAccessToken()
+		console.log(accessToken)
+
 		return {
 			method: String(method).toUpperCase(),
 			credentials: path.includes('auth') ? 'include' : 'same-origin',
