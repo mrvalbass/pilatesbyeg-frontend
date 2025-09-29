@@ -44,6 +44,7 @@ export function UserLoginModal({ isOpen, onClose }: UserLoginModalProps) {
 					firstName: data.user.firstName,
 					role: data.user.role as UserRole,
 					balance: data.user.balance,
+					accessToken: data.accessToken,
 				})
 				handleClose()
 			} catch (error) {
