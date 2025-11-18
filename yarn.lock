@@ -398,7 +398,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/types@npm:^7.0.0, @babel/types@npm:^7.20.7, @babel/types@npm:^7.27.1, @babel/types@npm:^7.27.3, @babel/types@npm:^7.28.2, @babel/types@npm:^7.28.4, @babel/types@npm:^7.28.5":
+"@babel/types@npm:^7.0.0, @babel/types@npm:^7.20.7, @babel/types@npm:^7.26.0, @babel/types@npm:^7.27.1, @babel/types@npm:^7.27.3, @babel/types@npm:^7.28.2, @babel/types@npm:^7.28.4, @babel/types@npm:^7.28.5":
   version: 7.28.5
   resolution: "@babel/types@npm:7.28.5"
   dependencies:
@@ -2972,6 +2972,15 @@ __metadata:
   dependencies:
     "@types/babel__core": "npm:^7.20.5"
   checksum: 10c0/a2bd862aaa4875127c02e6020d3da67556a8f25981060252668dda65cf9a146202937ae80d2e8612c3c47afe19ac85577647b8cc216faa98567c685525a3f203
+  languageName: node
+  linkType: hard
+
+"babel-plugin-react-compiler@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "babel-plugin-react-compiler@npm:1.0.0"
+  dependencies:
+    "@babel/types": "npm:^7.26.0"
+  checksum: 10c0/9406267ada8d7dbdfe8906b40ecadb816a5f4cee2922bee23f7729293b369624ee135b5a9b0f263851c263c9787522ac5d97016c9a2b82d1668300e42b18aff8
   languageName: node
   linkType: hard
 
@@ -7039,6 +7048,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^8.47.0"
     "@typescript-eslint/parser": "npm:^8.47.0"
     autoprefixer: "npm:^10.4.22"
+    babel-plugin-react-compiler: "npm:^1.0.0"
     clsx: "npm:^2.1.1"
     daisyui: "npm:^5.5.5"
     eslint: "npm:^9.39.1"
