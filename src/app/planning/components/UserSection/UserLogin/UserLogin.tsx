@@ -14,14 +14,14 @@ const UserLogin = () => {
 		setUserLoginModalIsOpen(false)
 	}
 
-	const [userForgotPasswordModalIsOpen, setUserPasswordModalIsOpen] = useState(false)
+	const [userForgotPasswordModalIsOpen, setUserForgotPasswordModalIsOpen] = useState(false)
 
 	const handleUserPasswordClick = () => {
-		setUserPasswordModalIsOpen(true)
+		setUserForgotPasswordModalIsOpen(true)
 	}
 
 	const handleUserPasswordClose = () => {
-		setUserPasswordModalIsOpen(false)
+		setUserForgotPasswordModalIsOpen(false)
 	}
 
 	return (

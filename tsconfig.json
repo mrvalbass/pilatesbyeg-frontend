@@ -11,7 +11,7 @@
 		"moduleResolution": "bundler",
 		"resolveJsonModule": true,
 		"isolatedModules": true,
-		"jsx": "preserve",
+		"jsx": "react-jsx",
 		"incremental": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
@@ -40,6 +40,13 @@
 			"@store/*": ["./src/store/*"]
 		}
 	},
-	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/**/*.json"],
+	"include": [
+		"next-env.d.ts",
+		"**/*.ts",
+		"**/*.tsx",
+		".next/types/**/*.ts",
+		"src/**/*.json",
+		".next/dev/types/**/*.ts"
+	],
 	"exclude": ["node_modules"]
 }

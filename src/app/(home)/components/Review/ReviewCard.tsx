@@ -8,25 +8,31 @@ interface ReviewCardProps {
 	score: number
 }
 
+const BACKGROUNDS = [
+	'bg-[#FFD1DC]',
+	'bg-[#B5EAD7]',
+	'bg-[#C7CEEA]',
+	'bg-[#FFDAC1]',
+	'bg-[#E2F0CB]',
+	'bg-[#FFF1BA]',
+	'bg-[#AFCBFF]',
+	'bg-[#FFB7B2]',
+	'bg-[#D5AAFF]',
+	'bg-[#B9FBC0]',
+]
+
+const getRandomBackground = () => {
+	return BACKGROUNDS[Math.floor(Math.random() * 10)]
+}
+
 function ReviewCard({ review, reviewer, score }: ReviewCardProps) {
-	const BACKGROUNDS = [
-		'bg-[#FFD1DC]',
-		'bg-[#B5EAD7]',
-		'bg-[#C7CEEA]',
-		'bg-[#FFDAC1]',
-		'bg-[#E2F0CB]',
-		'bg-[#FFF1BA]',
-		'bg-[#AFCBFF]',
-		'bg-[#FFB7B2]',
-		'bg-[#D5AAFF]',
-		'bg-[#B9FBC0]',
-	]
+	const randomBackground = getRandomBackground()
 
 	return (
 		<Card className="flex h-fit w-[500px] flex-col gap-4">
 			<div className="flex items-center gap-4">
 				<div
-					className={`flex aspect-square w-10 items-center justify-center rounded-full text-2xl font-bold ${BACKGROUNDS[Math.floor(Math.random() * 10)]}`}
+					className={`flex aspect-square w-10 items-center justify-center rounded-full text-2xl font-bold ${randomBackground}`}
 				>
 					{reviewer.at(0)?.toUpperCase()}
 				</div>
