@@ -2,6 +2,8 @@ import eslintReact from '@eslint-react/eslint-plugin'
 import { FlatCompat } from '@eslint/eslintrc'
 import eslint from '@eslint/js'
 import tsparser from '@typescript-eslint/parser'
+import nextVitals from 'eslint-config-next/core-web-vitals'
+import prettier from 'eslint-config-prettier/flat'
 import imports from 'eslint-plugin-import'
 import jsxa11y from 'eslint-plugin-jsx-a11y'
 import react from 'eslint-plugin-react'
@@ -35,7 +37,7 @@ const eslintConfig = [
 	...tseslint.configs.stylisticTypeChecked,
 	eslintReact.configs['recommended-typescript'],
 	eslintReact.configs['recommended-type-checked'],
-	...compat.extends('next', 'prettier'),
+	...nextVitals,
 	{
 		languageOptions: {
 			parser: tsparser,
@@ -89,6 +91,7 @@ const eslintConfig = [
 			},
 		},
 	},
+	prettier,
 ]
 
 export default eslintConfig
