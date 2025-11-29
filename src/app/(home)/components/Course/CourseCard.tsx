@@ -7,7 +7,7 @@ interface CourseCardProps {
 	img: string
 	alt: string
 	title?: string
-	onClick: () => void | undefined
+	onClick: () => void
 }
 
 function CourseCard({ img, alt, title, onClick }: CourseCardProps) {
@@ -16,7 +16,7 @@ function CourseCard({ img, alt, title, onClick }: CourseCardProps) {
 	return isMobile ? (
 		<Card className="relative w-fit" onClick={onClick}>
 			<Image src={img} alt={alt} width={500} height={200} className="rounded-box aspect-square object-cover" />
-			<div className="to-neutral rounded-box absolute top-0 h-full w-full bg-gradient-to-b from-transparent via-transparent" />
+			<div className="to-neutral rounded-box absolute top-0 h-full w-full bg-linear-to-b from-transparent via-transparent" />
 			<p className="font-heading text-neutral-content absolute bottom-5 left-5 text-xl font-bold">
 				{title} <sup>ⓘ</sup>
 			</p>

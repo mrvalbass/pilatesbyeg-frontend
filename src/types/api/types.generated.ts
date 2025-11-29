@@ -148,6 +148,38 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/auth/send-sign-up-email": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["AuthController_sendSignUpEmail"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/users": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["UsersController_getUsers"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -160,50 +192,49 @@ export interface components {
             /** @example jean.dupont@gmail.com */
             email: string;
         };
-        CreateUserResponse: {
-            /** @example Jean */
-            firstName: string;
-            /** @example Dupont */
-            lastName: string;
-            /** @example jean.dupont@gmail.com */
-            email: string;
-            /**
-             * @example USER
-             * @enum {string}
-             */
-            role: "USER" | "ADMIN";
-            /** Format: date-time */
-            createdAt: string;
-        };
+        CreateUserResponse: Record<string, never>;
         SignInBody: {
             /** @example jean.dupont@gmail.com */
             email: string;
             password: string;
         };
-        GetUserResponse: {
+        SignInResponse_User: {
+            /** @description User ID */
             id: number;
-            /** @example Jean */
-            firstName: string;
-            /** @example jean.dupont@gmail.com */
+            /** @description User email */
             email: string;
-            /**
-             * @example USER
-             * @enum {string}
-             */
-            role: "USER" | "ADMIN";
-            /**
-             * @description User balance
-             * @example 10
-             */
+            /** @description User role */
+            role: string;
+            /** @description User first name */
+            firstName: string;
+            /** @description User last name */
+            lastName: string;
+            /** @description User balance */
             balance: number;
-            emailVerified: boolean;
-            /** @description Hashed password */
-            password: string;
         };
         SignInResponse: {
             /** @description JWT access token */
             accessToken: string;
-            user: components["schemas"]["GetUserResponse"];
+            user: components["schemas"]["SignInResponse_User"];
+        };
+        RefreshTokenResponse_User: {
+            /** @description User ID */
+            id: number;
+            /** @description User email */
+            email: string;
+            /** @description User role */
+            role: string;
+            /** @description User first name */
+            firstName: string;
+            /** @description User last name */
+            lastName: string;
+            /** @description User balance */
+            balance: number;
+        };
+        RefreshTokenResponse: {
+            /** @description JWT access token */
+            accessToken: string;
+            user: components["schemas"]["RefreshTokenResponse_User"];
         };
         VerifyEmailResponse: {
             emailVerified: boolean;
@@ -226,6 +257,28 @@ export interface components {
         SendForgotPasswordEmailBody: {
             /** @example jean.dupont@gmail.com */
             email: string;
+        };
+        SendSignUpEmailBody: {
+            /** @example jean.dupont@gmail.com */
+            email: string;
+        };
+        GetUsersResponse_User: {
+            /** @description User ID */
+            id: number;
+            /** @description User first name */
+            firstName: string;
+            /** @description User last name */
+            lastName: string;
+            /** @description User email */
+            email: string;
+            /** @description User balance */
+            balance: number;
+            /** @description User email verified */
+            emailVerified: boolean;
+        };
+        GetUsersResponse: {
+            /** @description List of users */
+            users: components["schemas"]["GetUsersResponse_User"][];
         };
     };
     responses: never;
@@ -313,7 +366,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["SignInResponse"];
+                    "application/json": components["schemas"]["RefreshTokenResponse"];
                 };
             };
         };
@@ -422,7 +475,49 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["ResetPasswordResponse"];
+                    "application/json": components["schemas"]["BasicResponse"];
+                };
+            };
+        };
+    };
+    AuthController_sendSignUpEmail: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SendSignUpEmailBody"];
+            };
+        };
+        responses: {
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BasicResponse"];
+                };
+            };
+        };
+    };
+    UsersController_getUsers: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GetUsersResponse"];
                 };
             };
         };
