@@ -1,49 +1,46 @@
-import type { Transition } from 'framer-motion'
-import { motion, MotionValue, useTransform } from 'motion/react'
-import { FaStar } from 'react-icons/fa6'
+import { motion, useMotionValue, useTransform } from 'motion/react'
 
-import { CarouselItem as CarouselItemType } from './Carousel'
+import type { CarouselItem } from './Carousel'
+
+const SPRING_OPTIONS = { type: 'spring' as const, stiffness: 300, damping: 30 }
 
 interface CarouselItemProps {
-	item: CarouselItemType | undefined
+	item: CarouselItem
 	index: number
-	trackItemOffset: number
-	x: MotionValue<number>
-	round: boolean
 	itemWidth: number
-	effectiveTransition: Transition
+	round: boolean
+	trackItemOffset: number
+	x: ReturnType<typeof useMotionValue<number>>
+	transition: typeof SPRING_OPTIONS | { duration: number }
 }
-function CarouselItem({ item, index, trackItemOffset, x, round, itemWidth, effectiveTransition }: CarouselItemProps) {
+export function CarouselItem({ item, index, itemWidth, round, trackItemOffset, x, transition }: CarouselItemProps) {
 	const range = [-(index + 1) * trackItemOffset, -index * trackItemOffset, -(index - 1) * trackItemOffset]
 	const outputRange = [90, 0, -90]
 	const rotateY = useTransform(x, range, outputRange, { clamp: false })
+
 	return (
 		<motion.div
-			className={`relative flex shrink-0 flex-col ${
+			key={`${item?.id ?? index}-${index}`}
+			className={`relative shrink-0 flex flex-col ${
 				round
-					? 'bg-base-100 items-center justify-center border-0 text-center'
-					: 'bg-base-100 items-start justify-between rounded-[12px]'
-			} cursor-grab overflow-hidden active:cursor-grabbing`}
+					? 'items-center justify-center text-center bg-[#060010] border-0'
+					: 'items-start justify-between bg-[#222] border border-[#222] rounded-xl'
+			} overflow-hidden cursor-grab active:cursor-grabbing`}
 			style={{
 				width: itemWidth,
 				height: round ? itemWidth : '100%',
-				rotateY: rotateY,
+				transform: `rotateY(${rotateY.get()}deg)`,
 				...(round && { borderRadius: '50%' }),
 			}}
-			transition={effectiveTransition}
+			transition={transition}
 		>
+			<div className={`${round ? 'p-0 m-0' : 'mb-4 p-5'}`}>
+				<span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#060010]">{item.icon}</span>
+			</div>
 			<div className="p-5">
-				<div className="mb-1 text-lg font-black text-white">{item?.title}</div>
-				<div className="mb-1 flex">
-					{Array.from(Array(item?.score)).map((_, index) => (
-						<FaStar className="fill-amber-300" key={index} />
-					))}
-				</div>
-
-				<p className="text-md text-white">{item?.description}</p>
+				<div className="mb-1 font-black text-lg text-white">{item.title}</div>
+				<p className="text-sm text-white">{item.description}</p>
 			</div>
 		</motion.div>
 	)
 }
-
-export { CarouselItem }

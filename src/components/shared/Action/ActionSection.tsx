@@ -9,8 +9,7 @@ import { ContactForm } from './ContactForm'
 
 const ActionSection = () => {
 	const role = useUserStore(state => state.role)
-	//eslint-disable-next-line
-	const tel = typeof window !== undefined ? 'tel:+33649810280' : '#cta'
+	const tel = 'tel:+33649810280'
 
 	if (role) {
 		return null

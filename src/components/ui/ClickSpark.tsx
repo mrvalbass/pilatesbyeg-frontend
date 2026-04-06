@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useCallback, useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 
 interface ClickSparkProps {
 	sparkColor?: string
@@ -10,6 +10,7 @@ interface ClickSparkProps {
 	duration?: number
 	easing?: 'linear' | 'ease-in' | 'ease-out' | 'ease-in-out'
 	extraScale?: number
+	children?: React.ReactNode
 }
 
 interface Spark {
@@ -27,10 +28,11 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
 	duration = 400,
 	easing = 'ease-out',
 	extraScale = 1.0,
+	children,
 }) => {
 	const canvasRef = useRef<HTMLCanvasElement>(null)
-	const sparksRef = useRef<Spark[]>([]) // Stores spark data
-	const startTimeRef = useRef<number | null>(null) // Tracks initial timestamp for animation
+	const sparksRef = useRef<Spark[]>([])
+	const startTimeRef = useRef<number | null>(null)
 
 	useEffect(() => {
 		const canvas = canvasRef.current
@@ -39,7 +41,7 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
 		const parent = canvas.parentElement
 		if (!parent) return
 
-		let resizeTimeout: NodeJS.Timeout
+		let resizeTimeout: ReturnType<typeof setTimeout>
 
 		const resizeCanvas = () => {
 			const { width, height } = parent.getBoundingClientRect()
@@ -51,17 +53,14 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
 
 		const handleResize = () => {
 			clearTimeout(resizeTimeout)
-			resizeTimeout = setTimeout(resizeCanvas, 100) // Debounce by 100ms
+			resizeTimeout = setTimeout(resizeCanvas, 100)
 		}
 
-		// Observe size changes
 		const ro = new ResizeObserver(handleResize)
 		ro.observe(parent)
 
-		// Initial sizing
 		resizeCanvas()
 
-		// Cleanup
 		return () => {
 			ro.disconnect()
 			clearTimeout(resizeTimeout)
@@ -93,13 +92,14 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
 		let animationId: number
 
 		const draw = (timestamp: number) => {
-			startTimeRef.current ??= timestamp // store initial time
+			if (!startTimeRef.current) {
+				startTimeRef.current = timestamp
+			}
 			ctx?.clearRect(0, 0, canvas.width, canvas.height)
 
 			sparksRef.current = sparksRef.current.filter((spark: Spark) => {
 				const elapsed = timestamp - spark.startTime
 				if (elapsed >= duration) {
-					// Spark finished its animation
 					return false
 				}
 
@@ -109,13 +109,11 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
 				const distance = eased * sparkRadius * extraScale
 				const lineLength = sparkSize * (1 - eased)
 
-				// Points for the spark line
 				const x1 = spark.x + distance * Math.cos(spark.angle)
 				const y1 = spark.y + distance * Math.sin(spark.angle)
 				const x2 = spark.x + (distance + lineLength) * Math.cos(spark.angle)
 				const y2 = spark.y + (distance + lineLength) * Math.sin(spark.angle)
 
-				// Draw the spark line
 				ctx.strokeStyle = sparkColor
 				ctx.lineWidth = 2
 				ctx.beginPath()
@@ -134,9 +132,9 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
 		return () => {
 			cancelAnimationFrame(animationId)
 		}
-	}, [sparkColor, sparkSize, sparkRadius, sparkCount, duration, easeFunc, extraScale])
+	}, [sparkColor, sparkSize, sparkRadius, duration, easeFunc, extraScale])
 
-	const handleClick = (e: React.MouseEvent<HTMLCanvasElement>): void => {
+	const handleClick = (e: React.MouseEvent<HTMLDivElement>): void => {
 		const canvas = canvasRef.current
 		if (!canvas) return
 		const rect = canvas.getBoundingClientRect()
@@ -154,7 +152,12 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
 		sparksRef.current.push(...newSparks)
 	}
 
-	return <canvas ref={canvasRef} className="absolute top-0 block h-full w-full select-none" onClick={handleClick} />
+	return (
+		<div className="relative w-full h-full" onClick={handleClick}>
+			<canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" />
+			{children}
+		</div>
+	)
 }
 
 export { ClickSpark }

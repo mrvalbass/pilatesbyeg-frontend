@@ -21,18 +21,19 @@ const BACKGROUNDS = [
 	'bg-[#B9FBC0]',
 ]
 
-const getRandomBackground = () => {
-	return BACKGROUNDS[Math.floor(Math.random() * 10)]
+const getBackgroundFromReviewer = (reviewer: string) => {
+	const sum = reviewer.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
+	return BACKGROUNDS[sum % BACKGROUNDS.length]
 }
 
 function ReviewCard({ review, reviewer, score }: ReviewCardProps) {
-	const randomBackground = getRandomBackground()
+	const background = getBackgroundFromReviewer(reviewer)
 
 	return (
-		<Card className="flex h-fit w-[500px] flex-col gap-4">
+		<Card className="flex h-fit w-125 flex-col gap-4">
 			<div className="flex items-center gap-4">
 				<div
-					className={`flex aspect-square w-10 items-center justify-center rounded-full text-2xl font-bold ${randomBackground}`}
+					className={`flex aspect-square w-10 items-center justify-center rounded-full text-2xl font-bold ${background}`}
 				>
 					{reviewer.at(0)?.toUpperCase()}
 				</div>

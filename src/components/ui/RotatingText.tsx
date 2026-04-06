@@ -1,11 +1,25 @@
 'use client'
 
-import type { TargetAndTransition, Transition, VariantLabels } from 'motion/react'
-import { AnimatePresence, motion } from 'motion/react'
-import React, { useCallback, useEffect, useImperativeHandle, useMemo, useState } from 'react'
+import {
+	AnimatePresence,
+	motion,
+	type Target,
+	type TargetAndTransition,
+	Transition,
+	type VariantLabels,
+} from 'motion/react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
 function cn(...classes: (string | undefined | null | boolean)[]): string {
 	return classes.filter(Boolean).join(' ')
+}
+
+const splitIntoCharacters = (text: string): string[] => {
+	if (typeof Intl !== 'undefined' && Intl.Segmenter) {
+		const segmenter = new Intl.Segmenter('en', { granularity: 'grapheme' })
+		return Array.from(segmenter.segment(text), segment => segment.segment)
+	}
+	return Array.from(text)
 }
 
 export interface RotatingTextRef {
@@ -22,9 +36,9 @@ export interface RotatingTextProps
 	> {
 	texts: string[]
 	transition?: Transition
-	initial?: boolean | VariantLabels | TargetAndTransition
+	initial?: boolean | Target | VariantLabels
 	animate?: boolean | VariantLabels | TargetAndTransition
-	exit?: VariantLabels | TargetAndTransition
+	exit?: Target | VariantLabels
 	animatePresenceMode?: 'sync' | 'wait'
 	animatePresenceInitial?: boolean
 	rotationInterval?: number
@@ -37,20 +51,15 @@ export interface RotatingTextProps
 	mainClassName?: string
 	splitLevelClassName?: string
 	elementLevelClassName?: string
+	onControl?: (controls: RotatingTextRef) => void
 }
 
-const defaultTransition: Transition = { type: 'spring', damping: 25, stiffness: 300 }
-const defaultInitial: TargetAndTransition = { y: '100%', opacity: 0 }
-const defaultAnimate: TargetAndTransition = { y: 0, opacity: 1 }
-const defaultExit: TargetAndTransition = { y: '-120%', opacity: 0 }
-
-const RotatingText = ({
-	ref,
+const RotatingText: React.FC<RotatingTextProps> = ({
 	texts,
-	transition = defaultTransition,
-	initial = defaultInitial,
-	animate = defaultAnimate,
-	exit = defaultExit,
+	transition = { type: 'spring', damping: 25, stiffness: 300 },
+	initial = { y: '100%', opacity: 0 },
+	animate = { y: 0, opacity: 1 },
+	exit = { y: '-120%', opacity: 0 },
 	animatePresenceMode = 'wait',
 	animatePresenceInitial = false,
 	rotationInterval = 2000,
@@ -63,20 +72,13 @@ const RotatingText = ({
 	mainClassName,
 	splitLevelClassName,
 	elementLevelClassName,
+	onControl,
 	...rest
-}: RotatingTextProps & { ref?: React.RefObject<RotatingTextRef | null> }) => {
+}) => {
 	const [currentTextIndex, setCurrentTextIndex] = useState<number>(0)
 
-	const splitIntoCharacters = (text: string): string[] => {
-		if (typeof Intl !== 'undefined' && Intl.Segmenter) {
-			const segmenter = new Intl.Segmenter('en', { granularity: 'grapheme' })
-			return Array.from(segmenter.segment(text), segment => segment.segment)
-		}
-		return Array.from(text)
-	}
-
 	const elements = useMemo(() => {
-		const currentText: string = texts[currentTextIndex]!
+		const currentText: string = texts[currentTextIndex] || ''
 		if (splitBy === 'characters') {
 			const words = currentText.split(' ')
 			return words.map((word, i) => ({
@@ -116,7 +118,7 @@ const RotatingText = ({
 				const randomIndex = Math.floor(Math.random() * total)
 				return Math.abs(randomIndex - index) * staggerDuration
 			}
-			return Math.abs(staggerFrom - index) * staggerDuration
+			return Math.abs((staggerFrom as number) - index) * staggerDuration
 		},
 		[staggerFrom, staggerDuration]
 	)
@@ -159,16 +161,16 @@ const RotatingText = ({
 		}
 	}, [currentTextIndex, handleIndexChange])
 
-	useImperativeHandle(
-		ref,
-		() => ({
-			next,
-			previous,
-			jumpTo,
-			reset,
-		}),
-		[next, previous, jumpTo, reset]
-	)
+	useEffect(() => {
+		if (onControl) {
+			onControl({
+				next,
+				previous,
+				jumpTo,
+				reset,
+			})
+		}
+	}, [onControl, next, previous, jumpTo, reset])
 
 	useEffect(() => {
 		if (!auto) return
@@ -178,16 +180,16 @@ const RotatingText = ({
 
 	return (
 		<motion.span
-			className={cn('relative flex flex-wrap whitespace-pre-wrap', mainClassName)}
+			className={cn('flex flex-wrap whitespace-pre-wrap relative', mainClassName)}
 			{...rest}
 			layout
 			transition={transition}
 		>
 			<span className="sr-only">{texts[currentTextIndex]}</span>
 			<AnimatePresence mode={animatePresenceMode} initial={animatePresenceInitial}>
-				<motion.div
+				<motion.span
 					key={currentTextIndex}
-					className={cn(splitBy === 'lines' ? 'flex w-full flex-col' : 'relative flex flex-wrap whitespace-pre-wrap')}
+					className={cn(splitBy === 'lines' ? 'flex flex-col w-full' : 'flex flex-wrap whitespace-pre-wrap relative')}
 					layout
 					aria-hidden="true"
 				>
@@ -217,11 +219,10 @@ const RotatingText = ({
 							</span>
 						)
 					})}
-				</motion.div>
+				</motion.span>
 			</AnimatePresence>
 		</motion.span>
 	)
 }
 
-RotatingText.displayName = 'RotatingText'
 export { RotatingText }

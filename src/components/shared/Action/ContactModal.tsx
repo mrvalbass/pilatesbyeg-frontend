@@ -1,6 +1,5 @@
-import { FormEventHandler, useRef } from 'react'
-
 import { Modal } from '@components/shared'
+import { FormEventHandler, useRef } from 'react'
 
 interface ContactModalProps {
 	isOpen: boolean

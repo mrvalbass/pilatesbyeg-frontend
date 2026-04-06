@@ -23,5 +23,6 @@
 		"source.fixAll.eslint": "explicit",
 		"source.addMissingImports": "always"
 	},
-	"cSpell.words": ["AGFF", "BPJEPS", "Eliane"]
+	"cSpell.words": ["AGFF", "BPJEPS", "Eliane"],
+	"biome.lsp.bin": "pnpm biome"
 }

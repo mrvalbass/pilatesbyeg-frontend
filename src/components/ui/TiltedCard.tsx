@@ -2,23 +2,23 @@
 
 import type { SpringOptions } from 'motion/react'
 import { motion, useMotionValue, useSpring } from 'motion/react'
+import Image from 'next/image'
 import { useRef, useState } from 'react'
 
 interface TiltedCardProps {
-	imageSrc: React.ComponentProps<'img'>['src']
+	imageSrc: string
 	altText?: string
 	captionText?: string
 	containerHeight?: React.CSSProperties['height']
 	containerWidth?: React.CSSProperties['width']
-	imageHeight?: React.CSSProperties['height']
-	imageWidth?: React.CSSProperties['width']
+	imageHeight?: string | number
+	imageWidth?: string | number
 	scaleOnHover?: number
 	rotateAmplitude?: number
 	showMobileWarning?: boolean
 	showTooltip?: boolean
 	overlayContent?: React.ReactNode
 	displayOverlayContent?: boolean
-	onClick?: (() => void) | undefined
 }
 
 const springValues: SpringOptions = {
@@ -27,22 +27,31 @@ const springValues: SpringOptions = {
 	mass: 2,
 }
 
-function TiltedCard({
+// Helper function to parse CSS values to numbers
+const parseCssValue = (value: string | number): number => {
+	if (typeof value === 'number') return value
+	const match = value.match(/^(\d+)/)
+	return match?.[1] ? parseInt(match[1], 10) : 300
+}
+
+export function TiltedCard({
 	imageSrc,
 	altText = 'Tilted card image',
 	captionText = '',
 	containerHeight = '300px',
 	containerWidth = '100%',
-	imageHeight = '300px',
-	imageWidth = '300px',
+	imageHeight = 300,
+	imageWidth = 300,
 	scaleOnHover = 1.1,
 	rotateAmplitude = 14,
 	showMobileWarning = true,
 	showTooltip = true,
 	overlayContent = null,
 	displayOverlayContent = false,
-	onClick,
 }: TiltedCardProps) {
+	// Parse CSS values to numbers for Next.js Image
+	const imageHeightPx = parseCssValue(imageHeight)
+	const imageWidthPx = parseCssValue(imageWidth)
 	const ref = useRef<HTMLElement>(null)
 	const x = useMotionValue(0)
 	const y = useMotionValue(0)
@@ -92,16 +101,10 @@ function TiltedCard({
 		rotateFigcaption.set(0)
 	}
 
-	function handleClick() {
-		if (onClick) {
-			onClick()
-		}
-	}
-
 	return (
 		<figure
 			ref={ref}
-			className="relative flex h-full w-full flex-col items-center justify-center [perspective:800px]"
+			className="relative w-full h-full perspective-midrange flex flex-col items-center justify-center"
 			style={{
 				height: containerHeight,
 				width: containerWidth,
@@ -111,14 +114,13 @@ function TiltedCard({
 			onMouseLeave={handleMouseLeave}
 		>
 			{showMobileWarning && (
-				<div className="absolute top-4 block text-center text-sm sm:hidden">
+				<div className="absolute top-4 text-center text-sm block sm:hidden">
 					This effect is not optimized for mobile. Check on desktop.
 				</div>
 			)}
 
 			<motion.div
-				onClick={handleClick}
-				className="relative cursor-pointer [transform-style:preserve-3d]"
+				className="relative transform-3d"
 				style={{
 					width: imageWidth,
 					height: imageHeight,
@@ -127,26 +129,32 @@ function TiltedCard({
 					scale,
 				}}
 			>
-				<motion.img
-					src={imageSrc}
-					alt={altText}
-					className="absolute top-0 left-0 [transform:translateZ(0)] rounded-[15px] object-cover will-change-transform"
+				<motion.div
+					className="absolute top-0 left-0 will-change-transform transform-[translateZ(0)]"
 					style={{
 						width: imageWidth,
 						height: imageHeight,
 					}}
-				/>
+				>
+					<Image
+						src={imageSrc}
+						alt={altText}
+						width={imageWidthPx}
+						height={imageHeightPx}
+						className="rounded-[15px] object-cover w-full h-full"
+					/>
+				</motion.div>
 
-				{displayOverlayContent && overlayContent ? (
-					<motion.div className="absolute bottom-10 left-10 z-[2] [transform:translateZ(30px)] will-change-transform">
+				{displayOverlayContent && overlayContent && (
+					<motion.div className="absolute top-0 left-0 z-2 will-change-transform transform-[translateZ(30px)]">
 						{overlayContent}
 					</motion.div>
-				) : null}
+				)}
 			</motion.div>
 
 			{showTooltip && (
 				<motion.figcaption
-					className="pointer-events-none absolute top-0 left-0 z-[3] hidden rounded-[4px] bg-white px-[10px] py-[4px] text-[10px] text-[#2d2d2d] opacity-0 sm:block"
+					className="pointer-events-none absolute left-0 top-0 rounded-sm bg-white px-2.5 py-1 text-[10px] text-[#2d2d2d] opacity-0 z-3 hidden sm:block"
 					style={{
 						x,
 						y,
@@ -160,5 +168,3 @@ function TiltedCard({
 		</figure>
 	)
 }
-
-export { TiltedCard }

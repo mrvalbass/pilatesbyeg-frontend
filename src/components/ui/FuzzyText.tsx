@@ -165,7 +165,7 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
 		return () => {
 			isCancelled = true
 			window.cancelAnimationFrame(animationFrameId)
-			if (canvas && canvas.cleanupFuzzyText) {
+			if (canvas?.cleanupFuzzyText) {
 				canvas.cleanupFuzzyText()
 			}
 		}

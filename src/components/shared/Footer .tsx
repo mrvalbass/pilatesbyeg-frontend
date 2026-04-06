@@ -1,11 +1,9 @@
 import Link from 'next/link'
 import { FaEnvelope, FaPhone } from 'react-icons/fa6'
 
-const Footer = () => {
-	//eslint-disable-next-line
-	const tel = typeof window !== undefined ? 'tel:+33649810280' : '#cta'
-	//eslint-disable-next-line
-	const mail = typeof window !== undefined ? 'mailto:eliane-guillot@hotmail.fr' : '#cta'
+export function Footer() {
+	const tel = 'tel:+33649810280'
+	const mail = 'mailto:eliane-guillot@hotmail.fr'
 
 	return (
 		<footer className="bg-neutral text-neutral-content flex flex-col gap-12 px-10 py-16 md:flex-row md:gap-42 md:px-20">
@@ -27,5 +25,3 @@ const Footer = () => {
 		</footer>
 	)
 }
-
-export { Footer }

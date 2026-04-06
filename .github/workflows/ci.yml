@@ -19,16 +19,16 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: yarn install
+        run: pnpm install
 
       - name: Check linter
-        run: yarn lint
+        run: pnpm lint
 
       - name: Check Types
-        run: yarn type-check
+        run: pnpm type-check
 
       - name: Check format
-        run: yarn format:check
+        run: pnpm format:fix
 
       - name: Run tests
-        run: yarn test:coverage
+        run: pnpm test:coverage

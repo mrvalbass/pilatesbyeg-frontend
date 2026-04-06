@@ -12,5 +12,5 @@ enum UserRole {
 	USER = 'USER',
 }
 
-export { UserRole }
 export type { UserStore }
+export { UserRole }

@@ -41,6 +41,7 @@ async function refreshAccessToken() {
 		const error = (await refreshRes.json()) as NestHttpError
 		console.error(typeof error.message === 'string' ? error.message : error.message.join(', '))
 		useUserStore.setState(state => ({ ...state, isLoading: false }))
+		return // Add return to prevent further execution
 	}
 
 	const { accessToken, user } = (await refreshRes.json()) as { accessToken: string; user: Partial<UserStore> }

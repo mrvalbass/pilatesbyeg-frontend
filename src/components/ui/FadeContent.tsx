@@ -1,66 +1,121 @@
 'use client'
 
-import { ReactNode, useEffect, useRef, useState } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import * as React from 'react'
+import { useEffect, useRef } from 'react'
 
-interface FadeContentProps {
-	children: ReactNode
+gsap.registerPlugin(ScrollTrigger)
+
+interface FadeContentProps extends React.HTMLAttributes<HTMLDivElement> {
+	children: React.ReactNode
+	container?: Element | string | null
 	blur?: boolean
 	duration?: number
-	easing?: string
+	ease?: string
 	delay?: number
 	threshold?: number
 	initialOpacity?: number
-	className?: string
+	disappearAfter?: number
+	disappearDuration?: number
+	disappearEase?: string
+	onComplete?: () => void
+	onDisappearanceComplete?: () => void
 }
 
 const FadeContent: React.FC<FadeContentProps> = ({
 	children,
+	container,
 	blur = false,
 	duration = 1000,
-	easing = 'ease-out',
+	ease = 'power2.out',
 	delay = 0,
 	threshold = 0.1,
 	initialOpacity = 0,
+	disappearAfter = 0,
+	disappearDuration = 0.5,
+	disappearEase = 'power2.in',
+	onComplete,
+	onDisappearanceComplete,
 	className = '',
+	...props
 }) => {
-	const [inView, setInView] = useState(false)
-	const ref = useRef<HTMLDivElement | null>(null)
+	const ref = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
-		let timeout: NodeJS.Timeout
-		const element = ref.current
-		if (!element) return
+		const el = ref.current
+		if (!el) return
 
-		const observer = new IntersectionObserver(
-			([entry]) => {
-				if (entry?.isIntersecting) {
-					observer.unobserve(element)
-					timeout = setTimeout(() => {
-						setInView(true)
-					}, delay)
+		let scrollerTarget: Element | string | null = container || document.getElementById('snap-main-container') || null
+
+		if (typeof scrollerTarget === 'string') {
+			scrollerTarget = document.querySelector(scrollerTarget)
+		}
+
+		const startPct = (1 - threshold) * 100
+		const getSeconds = (val: number) => (val > 10 ? val / 1000 : val)
+
+		gsap.set(el, {
+			autoAlpha: initialOpacity,
+			filter: blur ? 'blur(10px)' : 'blur(0px)',
+			willChange: 'opacity, filter, transform',
+		})
+
+		const tl = gsap.timeline({
+			paused: true,
+			delay: getSeconds(delay),
+			onComplete: () => {
+				if (onComplete) onComplete()
+				if (disappearAfter > 0) {
+					gsap.to(el, {
+						autoAlpha: initialOpacity,
+						filter: blur ? 'blur(10px)' : 'blur(0px)',
+						delay: getSeconds(disappearAfter),
+						duration: getSeconds(disappearDuration),
+						ease: disappearEase,
+						onComplete: () => onDisappearanceComplete?.(),
+					})
 				}
 			},
-			{ threshold }
-		)
+		})
 
-		observer.observe(element)
+		tl.to(el, {
+			autoAlpha: 1,
+			filter: 'blur(0px)',
+			duration: getSeconds(duration),
+			ease: ease,
+		})
+
+		const st = ScrollTrigger.create({
+			trigger: el,
+			scroller: scrollerTarget || window,
+			start: `top ${startPct}%`,
+			once: true,
+			onEnter: () => tl.play(),
+		})
 
 		return () => {
-			if (timeout) clearTimeout(timeout)
-			observer.disconnect()
+			st.kill()
+			tl.kill()
+			gsap.killTweensOf(el)
 		}
-	}, [threshold, delay])
+	}, [
+		blur,
+		duration,
+		ease,
+		delay,
+		threshold,
+		initialOpacity,
+		disappearAfter,
+		disappearDuration,
+		disappearEase,
+		onComplete,
+		onDisappearanceComplete,
+		container,
+	])
 
 	return (
-		<div
-			ref={ref}
-			className={className}
-			style={{
-				opacity: inView ? 1 : initialOpacity,
-				transition: `opacity ${duration}ms ${easing}, filter ${duration}ms ${easing}`,
-				filter: blur ? (inView ? 'blur(0px)' : 'blur(10px)') : 'none',
-			}}
-		>
+		<div ref={ref} className={className} {...props}>
 			{children}
 		</div>
 	)
