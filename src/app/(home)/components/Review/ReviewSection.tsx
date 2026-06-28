@@ -5,7 +5,7 @@ import { useIsMobile } from '@/hooks'
 
 import { ReviewCard } from './ReviewCard'
 
-function ReviewSection() {
+export function ReviewSection() {
 	const isMobile = useIsMobile()
 	const reviews = [
 		{
@@ -38,13 +38,14 @@ function ReviewSection() {
 		description: review.review,
 		id: index,
 		score: review.score,
+		icon: <p className="text-primary font-bold">{review.reviewer.at(0)?.toUpperCase()}</p>,
 	}))
 
 	return (
 		<section className="bg-base-200 min-h-[20svh] overflow-hidden py-24">
 			{isMobile ? (
 				<div className="flex items-center justify-center p-6">
-					<Carousel items={carouselItems} autoplay autoplayDelay={5000} />
+					<Carousel items={carouselItems} autoplay autoplayDelay={5000} loop />
 				</div>
 			) : (
 				<div className="animate-banner flex w-fit items-center gap-24 px-12">
@@ -56,5 +57,3 @@ function ReviewSection() {
 		</section>
 	)
 }
-
-export { ReviewSection }

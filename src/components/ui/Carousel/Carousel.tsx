@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, PanInfo, useMotionValue } from 'motion/react'
-import { JSX, useEffect, useMemo, useRef, useState } from 'react'
+import React, { JSX, useEffect, useMemo, useRef, useState } from 'react'
 
 // replace icons with your own if needed
 import { FiCircle, FiCode, FiFileText, FiLayers, FiLayout } from 'react-icons/fi'
@@ -222,25 +222,31 @@ export function Carousel({
 				onAnimationStart={handleAnimationStart}
 				onAnimationComplete={handleAnimationComplete}
 			>
-				{itemsForRender.map((item, index) => (
-					<CarouselItem
-						key={`${item?.id ?? index}-${index}`}
-						item={item!}
-						index={index}
-						itemWidth={itemWidth}
-						round={round}
-						trackItemOffset={trackItemOffset}
-						x={x}
-						transition={effectiveTransition}
-					/>
-				))}
+				{itemsForRender.map(
+					(item, index) =>
+						item && (
+							<CarouselItem
+								key={`${item?.id ?? index}-${index}`}
+								item={item}
+								index={index}
+								itemWidth={itemWidth}
+								round={round}
+								trackItemOffset={trackItemOffset}
+								x={x}
+								transition={effectiveTransition}
+							/>
+						)
+				)}
 			</motion.div>
 			<div className={`flex w-full justify-center ${round ? 'absolute z-20 bottom-12 left-1/2 -translate-x-1/2' : ''}`}>
 				<div className="mt-4 flex w-37.5 justify-between px-8">
 					{items.map((_, index) => (
-						<motion.div
+						<motion.button
+							type="button"
 							key={index}
-							className={`h-2 w-2 rounded-full cursor-pointer transition-colors duration-150 ${
+							aria-label={`Go to slide ${index + 1}`}
+							aria-current={activeIndex === index}
+							className={`h-2 w-2 rounded-full cursor-pointer border-0 p-0 appearance-none transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
 								activeIndex === index
 									? round
 										? 'bg-white'

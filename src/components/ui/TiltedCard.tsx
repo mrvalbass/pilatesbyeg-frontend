@@ -11,27 +11,23 @@ interface TiltedCardProps {
 	captionText?: string
 	containerHeight?: React.CSSProperties['height']
 	containerWidth?: React.CSSProperties['width']
-	imageHeight?: string | number
-	imageWidth?: string | number
+	imageHeight?: React.CSSProperties['height']
+	imageWidth?: React.CSSProperties['width']
 	scaleOnHover?: number
 	rotateAmplitude?: number
 	showMobileWarning?: boolean
 	showTooltip?: boolean
 	overlayContent?: React.ReactNode
 	displayOverlayContent?: boolean
+	onClick?: () => void
 }
+
+const MotionImage = motion(Image)
 
 const springValues: SpringOptions = {
 	damping: 30,
 	stiffness: 100,
 	mass: 2,
-}
-
-// Helper function to parse CSS values to numbers
-const parseCssValue = (value: string | number): number => {
-	if (typeof value === 'number') return value
-	const match = value.match(/^(\d+)/)
-	return match?.[1] ? parseInt(match[1], 10) : 300
 }
 
 export function TiltedCard({
@@ -40,18 +36,16 @@ export function TiltedCard({
 	captionText = '',
 	containerHeight = '300px',
 	containerWidth = '100%',
-	imageHeight = 300,
-	imageWidth = 300,
+	imageHeight = '300px',
+	imageWidth = '300px',
 	scaleOnHover = 1.1,
 	rotateAmplitude = 14,
 	showMobileWarning = true,
 	showTooltip = true,
 	overlayContent = null,
 	displayOverlayContent = false,
+	onClick,
 }: TiltedCardProps) {
-	// Parse CSS values to numbers for Next.js Image
-	const imageHeightPx = parseCssValue(imageHeight)
-	const imageWidthPx = parseCssValue(imageWidth)
 	const ref = useRef<HTMLElement>(null)
 	const x = useMotionValue(0)
 	const y = useMotionValue(0)
@@ -128,22 +122,17 @@ export function TiltedCard({
 					rotateY,
 					scale,
 				}}
+				onClick={onClick}
 			>
-				<motion.div
-					className="absolute top-0 left-0 will-change-transform transform-[translateZ(0)]"
+				<MotionImage
+					src={imageSrc}
+					alt={altText}
+					className="absolute top-0 left-0 object-cover rounded-[15px] will-change-transform transform-[translateZ(0)]"
 					style={{
 						width: imageWidth,
 						height: imageHeight,
 					}}
-				>
-					<Image
-						src={imageSrc}
-						alt={altText}
-						width={imageWidthPx}
-						height={imageHeightPx}
-						className="rounded-[15px] object-cover w-full h-full"
-					/>
-				</motion.div>
+				/>
 
 				{displayOverlayContent && overlayContent && (
 					<motion.div className="absolute top-0 left-0 z-2 will-change-transform transform-[translateZ(30px)]">

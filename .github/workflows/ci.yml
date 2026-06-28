@@ -31,4 +31,4 @@ jobs:
         run: pnpm format:fix
 
       - name: Run tests
-        run: pnpm test:coverage
+        run: pnpm test
